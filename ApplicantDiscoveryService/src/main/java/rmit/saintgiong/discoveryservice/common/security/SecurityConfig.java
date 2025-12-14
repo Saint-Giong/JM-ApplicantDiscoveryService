@@ -35,7 +35,6 @@ public class SecurityConfig {
                                 "/api-docs.yaml",
                                 "/v3/api-docs/**"
                         ).permitAll()
-                        .requestMatchers("/register").permitAll()
                         .anyRequest().permitAll()
                 );
 

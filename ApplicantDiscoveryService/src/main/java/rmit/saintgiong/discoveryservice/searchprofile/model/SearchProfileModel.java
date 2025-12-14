@@ -1,4 +1,34 @@
 package rmit.saintgiong.discoveryservice.searchprofile.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import rmit.saintgiong.discoveryservice.common.degree.type.DegreeType;
+
+import java.util.BitSet;
+import java.util.Set;
+import java.util.UUID;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class SearchProfileModel {
+
+    private UUID profileId;
+
+    private Double salaryMin;
+
+    private Double salaryMax;
+
+    private DegreeType highestDegree;
+
+    private BitSet employmentType;
+
+    private String country;
+
+    private UUID companyId;
+
+    private Set<SearchProfile_SkillTagModel> skillTags;
 }
