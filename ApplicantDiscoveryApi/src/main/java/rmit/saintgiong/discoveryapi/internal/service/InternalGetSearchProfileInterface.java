@@ -8,4 +8,5 @@ import java.util.UUID;
 public interface InternalGetSearchProfileInterface {
     SearchProfileResponseDto getSearchProfileById(UUID id);
 
+    List<SearchProfileResponseDto> getSearchProfilesByCompanyId(UUID companyId);
 }

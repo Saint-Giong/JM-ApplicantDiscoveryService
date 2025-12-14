@@ -46,5 +46,28 @@ public class GetSearchProfileService implements InternalGetSearchProfileInterfac
         // Convert entity to response DTO (handles BitSet -> String conversion for employment types)
         return searchProfileMapper.entityToResponseDto(entity);
     }
+
+    /**
+     * Retrieves all search profiles belonging to a specific company.
+     * 
+     * @param companyId the UUID of the company to retrieve profiles for
+     * @return a list of {@link SearchProfileResponseDto} containing all profiles
+     *         for the specified company, or an empty list if none exist
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<SearchProfileResponseDto> getSearchProfilesByCompanyId(UUID companyId) {
+        log.info("Fetching all search profiles for company: {}", companyId);
+        
+        // Query the database for all search profiles belonging to the company
+        List<SearchProfileEntity> entities = searchProfileRepository.findByCompanyId(companyId);
+        
+        log.debug("Found {} search profiles for company: {}", entities.size(), companyId);
+        
+        // Convert each entity to response DTO
+        return entities.stream()
+                .map(searchProfileMapper::entityToResponseDto)
+                .toList();
+    }
 }
 

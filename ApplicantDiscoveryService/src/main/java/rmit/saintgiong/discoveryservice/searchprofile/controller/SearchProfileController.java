@@ -13,13 +13,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.saintgiong.discoveryapi.internal.dto.CreateSearchProfileRequestDto;
 import rmit.saintgiong.discoveryapi.internal.dto.SearchProfileResponseDto;
+import rmit.saintgiong.discoveryservice.common.dto.ApiResponseDto;
 import rmit.saintgiong.discoveryservice.common.dto.ErrorResponseDto;
 import rmit.saintgiong.discoveryservice.searchprofile.services.CreateSearchProfileService;
 import rmit.saintgiong.discoveryservice.searchprofile.services.DeleteSearchProfileService;
 import rmit.saintgiong.discoveryservice.searchprofile.services.GetSearchProfileService;
 import rmit.saintgiong.discoveryservice.searchprofile.services.UpdateSearchProfileService;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Callable;
 
 @RestController
 @AllArgsConstructor
@@ -46,7 +49,7 @@ public class SearchProfileController { //TODO: Check if the user is premium acco
                     description = "Search profile created successfully",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = SearchProfileResponseDto.class)
+                            schema = @Schema(implementation = ApiResponseDto.class)
                     )
             ),
             @ApiResponse(
@@ -59,11 +62,14 @@ public class SearchProfileController { //TODO: Check if the user is premium acco
             )
     })
     @PostMapping("/search-profile")
-    public ResponseEntity<SearchProfileResponseDto> createSearchProfile(
+    public Callable<ResponseEntity<ApiResponseDto<SearchProfileResponseDto>>> createSearchProfile(
             @Valid @RequestBody CreateSearchProfileRequestDto request) {
-        //TODO: for regular company user, company id should be from access token instead of request body
-        SearchProfileResponseDto createdProfile = createSearchProfileService.createSearchProfile(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdProfile);
+        return () -> {
+            //TODO: for regular company user, company id should be from access token instead of request body
+            SearchProfileResponseDto createdProfile = createSearchProfileService.createSearchProfile(request);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(ApiResponseDto.success(createdProfile, "Search profile created successfully"));
+        };
     }
 
     /**
@@ -79,7 +85,7 @@ public class SearchProfileController { //TODO: Check if the user is premium acco
                     description = "Search profile retrieved successfully",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = SearchProfileResponseDto.class)
+                            schema = @Schema(implementation = ApiResponseDto.class)
                     )
             ),
             @ApiResponse(
@@ -92,8 +98,37 @@ public class SearchProfileController { //TODO: Check if the user is premium acco
             )
     })
     @GetMapping("/search-profile/{id}")
-    public ResponseEntity<SearchProfileResponseDto> getSearchProfile(@PathVariable UUID id) {
-        return ResponseEntity.ok(getSearchProfileService.getSearchProfileById(id));
+    public Callable<ResponseEntity<ApiResponseDto<SearchProfileResponseDto>>> getSearchProfile(@PathVariable UUID id) {
+        return () -> {
+            SearchProfileResponseDto profile = getSearchProfileService.getSearchProfileById(id);
+            return ResponseEntity.ok(ApiResponseDto.success(profile, "Search profile retrieved successfully"));
+        };
+    }
+
+    /**
+     * Retrieves all search profiles belonging to a specific company.
+     */
+    @Operation(
+            summary = "Get all search profiles by company ID",
+            description = "Retrieves all search profiles that belong to a specific company using the company's unique identifier."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Search profiles retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ApiResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/search-profile/company/{companyId}")
+    public Callable<ResponseEntity<ApiResponseDto<List<SearchProfileResponseDto>>>> getSearchProfilesByCompanyId(
+            @PathVariable UUID companyId) {
+        return () -> {
+            List<SearchProfileResponseDto> profiles = getSearchProfileService.getSearchProfilesByCompanyId(companyId);
+            return ResponseEntity.ok(ApiResponseDto.success(profiles, "Search profiles retrieved successfully"));
+        };
     }
 
 }
