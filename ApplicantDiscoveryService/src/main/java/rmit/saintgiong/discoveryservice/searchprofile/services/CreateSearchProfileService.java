@@ -28,10 +28,16 @@ public class CreateSearchProfileService implements InternalCreateSearchProfileIn
      *                and skill tag IDs
      * @return a {@link SearchProfileResponseDto} containing the created profile's
      *         details including the generated profile ID
+     * @throws IllegalArgumentException if the request is null
      */
     @Override
     @Transactional
     public SearchProfileResponseDto createSearchProfile(CreateSearchProfileRequestDto request) {
+        // Validate request is not null
+        if (request == null) {
+            throw new IllegalArgumentException("Request cannot be null");
+        }
+
         log.info("Creating search profile for company: {}", request.getCompanyId());
 
         // Convert the request DTO to entity, mapping basic fields
