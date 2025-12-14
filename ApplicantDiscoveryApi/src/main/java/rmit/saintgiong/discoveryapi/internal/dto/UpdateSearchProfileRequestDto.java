@@ -38,5 +38,5 @@ public class UpdateSearchProfileRequestDto {
     private UUID companyId;
 
     @Schema(description = "List of skill tag technical background filtering")
-    private Set<String> skillTagId;
+    private Set<Integer> skillTagId;
 }

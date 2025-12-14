@@ -1,5 +1,6 @@
 package rmit.saintgiong.discoveryservice.common.exception;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,25 @@ import java.util.Map;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ErrorResponseDto> handleEntityNotFoundException(
+            EntityNotFoundException exception,
+            WebRequest request
+    ) {
+        log.warn("Entity not found: {}", exception.getMessage());
+        
+        ErrorResponseDto errorResponseDto = ErrorResponseDto.builder()
+                .apiPath(request.getDescription(false).replace("uri=", ""))
+                .errorCode(HttpStatus.NOT_FOUND)
+                .message(exception.getMessage())
+                .timeStamp(LocalDateTime.now())
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(errorResponseDto);
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDto> handleGlobalException(
@@ -67,6 +87,27 @@ public class GlobalExceptionHandler {
             IllegalStateException exception,
             WebRequest request
     ) {
+        log.warn("Illegal state: {}", exception.getMessage());
+        
+        ErrorResponseDto errorResponseDto = ErrorResponseDto.builder()
+                .apiPath(request.getDescription(false).replace("uri=", ""))
+                .errorCode(HttpStatus.BAD_REQUEST)
+                .message(exception.getMessage())
+                .timeStamp(LocalDateTime.now())
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(errorResponseDto);
+    }
+
+    @ExceptionHandler(InvalidEnumValueException.class)
+    public ResponseEntity<ErrorResponseDto> handleInvalidEnumValueException(
+            InvalidEnumValueException exception,
+            WebRequest request
+    ) {
+        log.warn("Invalid enum value: {}", exception.getMessage());
+        
         ErrorResponseDto errorResponseDto = ErrorResponseDto.builder()
                 .apiPath(request.getDescription(false).replace("uri=", ""))
                 .errorCode(HttpStatus.BAD_REQUEST)

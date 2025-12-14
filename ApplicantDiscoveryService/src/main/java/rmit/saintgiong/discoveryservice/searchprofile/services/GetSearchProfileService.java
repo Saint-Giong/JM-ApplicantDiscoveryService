@@ -21,13 +21,29 @@ public class GetSearchProfileService implements InternalGetSearchProfileInterfac
     private final SearchProfileRepository searchProfileRepository;
     private final SearchProfileMapper searchProfileMapper;
 
+    /**
+     * Retrieves a search profile by its unique identifier.
+     * 
+     * @param id the UUID of the search profile to retrieve
+     * @return a {@link SearchProfileResponseDto} containing the profile's details
+     *         including salary range, degree, employment types, and skill tags
+     * @throws EntityNotFoundException if no search profile exists with the given ID
+     */
     @Override
     @Transactional(readOnly = true)
     public SearchProfileResponseDto getSearchProfileById(UUID id) {
+        log.info("Fetching search profile with ID: {}", id);
+        
+        // Query the database for the search profile, throw exception if not found
         SearchProfileEntity entity = searchProfileRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Search Profile not found with id: " + id));
+                .orElseThrow(() -> {
+                    log.warn("Search profile not found with ID: {}", id);
+                    return new EntityNotFoundException("Search Profile not found with id: " + id);
+                });
 
-        // The Mapper handles the complex BitSet -> String conversion
+        log.debug("Search profile found for company: {}", entity.getCompanyId());
+        
+        // Convert entity to response DTO (handles BitSet -> String conversion for employment types)
         return searchProfileMapper.entityToResponseDto(entity);
     }
 }

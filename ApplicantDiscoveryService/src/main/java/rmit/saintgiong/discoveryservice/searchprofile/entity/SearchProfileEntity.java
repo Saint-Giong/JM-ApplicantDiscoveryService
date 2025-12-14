@@ -15,8 +15,6 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 @ToString(exclude = "skillTags")
 @Builder
 public class SearchProfileEntity {
