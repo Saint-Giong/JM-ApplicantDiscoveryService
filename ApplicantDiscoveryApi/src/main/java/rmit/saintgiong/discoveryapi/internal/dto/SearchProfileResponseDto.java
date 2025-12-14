@@ -29,7 +29,7 @@ public class SearchProfileResponseDto {
     private String highestDegree;
 
     @Schema(description = "Employment types selected", example = "[0, 1, 2]")
-    private Set<Integer> employmentTypes;
+    private Set<String> employmentTypes;
 
     @Schema(description = "Country for the search", example = "Vietnam")
     private String country;
@@ -38,5 +38,5 @@ public class SearchProfileResponseDto {
     private UUID companyId;
 
     @Schema(description = "List of skill tag IDs for technical background filtering")
-    private Set<UUID> skillTagIds;
+    private Set<Integer> skillTagIds;
 }

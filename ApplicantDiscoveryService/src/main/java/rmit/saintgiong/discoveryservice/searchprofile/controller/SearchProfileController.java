@@ -13,10 +13,12 @@ import rmit.saintgiong.discoveryservice.searchprofile.services.DeleteSearchProfi
 import rmit.saintgiong.discoveryservice.searchprofile.services.GetSearchProfileService;
 import rmit.saintgiong.discoveryservice.searchprofile.services.UpdateSearchProfileService;
 
+import java.util.UUID;
+
 @RestController
 @AllArgsConstructor
 @Tag(name = "Search Profile", description = "APIs for managing applicant search profiles")
-public class SearchProfileController {
+public class SearchProfileController { //TODO: Check if the user is premium account
 
     private final CreateSearchProfileService createSearchProfileService;
     private final GetSearchProfileService getSearchProfileService;
@@ -26,8 +28,14 @@ public class SearchProfileController {
     @PostMapping("/search-profile")
     public ResponseEntity<SearchProfileResponseDto> createSearchProfile(
             @Valid @RequestBody CreateSearchProfileRequestDto request) {
+        //TODO: for regular company user, company id should be from access token instead of request body
         SearchProfileResponseDto createdProfile = createSearchProfileService.createSearchProfile(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProfile);
+    }
+
+    @GetMapping("/search-profile/{id}")
+    public ResponseEntity<SearchProfileResponseDto> getSearchProfile(@PathVariable UUID id) {
+        return ResponseEntity.ok(getSearchProfileService.getSearchProfileById(id));
     }
 
 }

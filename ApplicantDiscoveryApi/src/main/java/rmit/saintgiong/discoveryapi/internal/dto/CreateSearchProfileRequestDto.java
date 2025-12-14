@@ -29,7 +29,7 @@ public class CreateSearchProfileRequestDto {
     @Schema(description = "Highest education degree required", example = "BACHELOR")
     private String highestDegree;
 
-    @Schema(description = "Employment type as bitmap (Full-time, Part-time, Fresher, Internship, Contract)", example = "[Fresher, Full-time, Contract]")
+    @Schema(description = "Employment type as Set (Full-time, Part-time, Fresher, Internship, Contract)", example = "[Fresher, Full-time, Contract]")
     private Set<String> employmentTypes;
 
     @Schema(description = "Country for the search", example = "Vietnam")
@@ -37,8 +37,8 @@ public class CreateSearchProfileRequestDto {
 
     @NotNull(message = "Company ID is required")
     @Schema(description = "Company ID that owns this search profile", example = "123e4567-e89b-12d3-a456-426614174000")
-    private UUID companyId;
+    private UUID companyId; //TODO: for regular company user, company id should be from access token instead of request body
 
     @Schema(description = "List of skill tag technical background filtering")
-    private Set<String> skillTagId;
+    private Set<Integer> skillTagIds;
 }

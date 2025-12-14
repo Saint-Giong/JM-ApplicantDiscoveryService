@@ -45,6 +45,10 @@
             <version>2.2.27</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

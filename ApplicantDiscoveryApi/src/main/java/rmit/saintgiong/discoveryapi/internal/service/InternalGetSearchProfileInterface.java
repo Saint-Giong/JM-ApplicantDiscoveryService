@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface InternalGetSearchProfileInterface {
-    SearchProfileResponseDto getSearchProfileById(UUID profileId);
-    List<SearchProfileResponseDto> getSearchProfilesByCompanyId(UUID companyId);
+    SearchProfileResponseDto getSearchProfileById(UUID id);
+
 }

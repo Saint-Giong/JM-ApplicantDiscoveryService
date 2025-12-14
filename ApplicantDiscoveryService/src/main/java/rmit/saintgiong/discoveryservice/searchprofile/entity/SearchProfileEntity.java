@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import rmit.saintgiong.discoveryservice.common.degree.type.DegreeType;
 
 import java.util.BitSet;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,4 +46,14 @@ public class SearchProfileEntity {
     @OneToMany(mappedBy = "searchProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<SearchProfile_SkillTagEntity> skillTags;
 
+    public void addSkillTag(Integer tagId) {
+        SearchProfile_SkillTagEntity skillTagEntity = new SearchProfile_SkillTagEntity(this, tagId);
+
+        if (this.skillTags == null) {
+            this.skillTags = new HashSet<>();
+        }
+
+        this.skillTags.add(skillTagEntity);
+        skillTagEntity.setSearchProfile(this);
+    }
 }

@@ -3,29 +3,28 @@ package rmit.saintgiong.discoveryservice.searchprofile.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.UUID;
 
-@Entity(name = "searchprofile_skilltag")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
+@Entity(name = "search_profile_skill_tag")
 @Getter
-@ToString(exclude = "searchProfile")
-@Builder
+@Setter
 public class SearchProfile_SkillTagEntity {
 
     @EmbeddedId
-    private SearchProfileSkillTagId id;
+    private SearchProfileSkillTagId skillTagId;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("profileId")
-    @JoinColumn(name = "profile_id", nullable = false)
+    @MapsId("profileId") // Links to 'profileId' field in SearchProfileSkillTagId
+    @JoinColumn(name = "profile_id")
     private SearchProfileEntity searchProfile;
 
-    @Column(name = "tag_id", insertable = false, updatable = false)
-    private UUID tagId;
+    // Constructors
+    public SearchProfile_SkillTagEntity() {}
+    public SearchProfile_SkillTagEntity(SearchProfileEntity profile, Integer tagId) {
+        this.searchProfile = profile;
+        this.skillTagId = new SearchProfileSkillTagId(profile.getProfileId(), tagId);
+    }
 
 }
