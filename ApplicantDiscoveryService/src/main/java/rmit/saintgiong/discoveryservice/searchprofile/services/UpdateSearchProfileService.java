@@ -52,6 +52,10 @@ public class UpdateSearchProfileService implements InternalUpdateSearchProfileIn
         // Apply partial updates from the request DTO to the existing entity
         searchProfileMapper.updateEntityFromDto(request, existingEntity);
 
+        // Validate salary range after partial update is applied
+        // This catches cases where only salaryMin or salaryMax is updated
+        validateSalaryRangeAfterUpdate(existingEntity, request);
+
         // Update skill tags if provided in the request
         if (request.getSkillTagIds() != null) {
             // Clear existing skill tags and add new ones
@@ -67,5 +71,45 @@ public class UpdateSearchProfileService implements InternalUpdateSearchProfileIn
 
         // Convert and return the updated entity as response DTO
         return searchProfileMapper.entityToResponseDto(savedEntity);
+    }
+
+    /**
+     * Validates that the salary range is valid after applying partial updates.
+     * This handles edge cases where only salaryMin or salaryMax is updated,
+     * ensuring the resulting range is still valid (min <= max).
+     *
+     * @param entity  the entity with updated values
+     * @param request the update request (used to determine which fields were updated)
+     * @throws IllegalArgumentException if salaryMin > salaryMax after the update
+     */
+    private void validateSalaryRangeAfterUpdate(SearchProfileEntity entity, UpdateSearchProfileRequestDto request) {
+        Double salaryMin = entity.getSalaryMin();
+        Double salaryMax = entity.getSalaryMax();
+
+        // Only validate if both values exist after the update
+        if (salaryMin != null && salaryMax != null && salaryMin > salaryMax) {
+            String errorMessage;
+            if (request.getSalaryMin() != null && request.getSalaryMax() == null) {
+                // Only min was updated
+                errorMessage = String.format(
+                        "Updated minimum salary (%.2f) cannot be greater than existing maximum salary (%.2f)",
+                        salaryMin, salaryMax);
+            } else if (request.getSalaryMax() != null && request.getSalaryMin() == null) {
+                // Only max was updated
+                errorMessage = String.format(
+                        "Updated maximum salary (%.2f) cannot be less than existing minimum salary (%.2f)",
+                        salaryMax, salaryMin);
+            } else {
+                // Both were updated (caught by @ValidSalaryRange, but double-check here)
+                errorMessage = String.format(
+                        "Minimum salary (%.2f) must be less than or equal to maximum salary (%.2f)",
+                        salaryMin, salaryMax);
+            }
+            log.warn("Salary range validation failed for profile {}: {}", entity.getProfileId(), errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        log.debug("Salary range validation passed for profile {}: min={}, max={}",
+                entity.getProfileId(), salaryMin, salaryMax);
     }
 }
