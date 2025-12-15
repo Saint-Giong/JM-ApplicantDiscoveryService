@@ -28,7 +28,7 @@ public class UpdateSearchProfileService implements InternalUpdateSearchProfileIn
      * @param profileId the unique identifier of the profile to update
      * @param request   the update request containing fields to modify
      * @return a {@link SearchProfileResponseDto} containing the updated profile's details
-     * @throws IllegalArgumentException if profileId or request is null
+     * @throws IllegalArgumentException if profileId or request is null, or if salary range is invalid
      * @throws EntityNotFoundException  if no profile exists with the given ID
      */
     @Override
@@ -53,10 +53,10 @@ public class UpdateSearchProfileService implements InternalUpdateSearchProfileIn
         searchProfileMapper.updateEntityFromDto(request, existingEntity);
 
         // Update skill tags if provided in the request
-        if (request.getSkillTagId() != null) {
+        if (request.getSkillTagIds() != null) {
             // Clear existing skill tags and add new ones
             existingEntity.getSkillTags().clear();
-            for (Integer tagId : request.getSkillTagId()) {
+            for (Integer tagId : request.getSkillTagIds()) {
                 existingEntity.addSkillTag(tagId);
             }
         }
