@@ -66,7 +66,7 @@ class UpdateSearchProfileServiceTest {
                 .employmentTypes(Set.of("FULL_TIME", "CONTRACT"))
                 .country("Singapore")
                 .companyId(companyId)
-                .skillTagId(Set.of(4, 5, 6))
+                .skillTagIds(Set.of(4, 5, 6))
                 .build();
 
         // Build existing entity (before update)
@@ -182,7 +182,7 @@ class UpdateSearchProfileServiceTest {
             UpdateSearchProfileRequestDto requestWithoutSkills = UpdateSearchProfileRequestDto.builder()
                     .salaryMin(60000.0)
                     .companyId(companyId)
-                    .skillTagId(null)
+                    .skillTagIds(null)
                     .build();
 
             when(searchProfileRepository.findById(profileId)).thenReturn(Optional.of(existingEntity));
