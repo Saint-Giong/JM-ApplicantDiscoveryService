@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rmit.saintgiong.discoveryapi.internal.dto.CreateSearchProfileRequestDto;
 import rmit.saintgiong.discoveryapi.internal.dto.SearchProfileResponseDto;
+import rmit.saintgiong.discoveryapi.internal.dto.UpdateSearchProfileRequestDto;
 import rmit.saintgiong.discoveryservice.common.dto.ApiResponseDto;
 import rmit.saintgiong.discoveryservice.common.dto.ErrorResponseDto;
 import rmit.saintgiong.discoveryservice.searchprofile.services.CreateSearchProfileService;
@@ -128,6 +129,84 @@ public class SearchProfileController { //TODO: Check if the user is premium acco
         return () -> {
             List<SearchProfileResponseDto> profiles = getSearchProfileService.getSearchProfilesByCompanyId(companyId);
             return ResponseEntity.ok(ApiResponseDto.success(profiles, "Search profiles retrieved successfully"));
+        };
+    }
+
+    /**
+     * Updates an existing search profile with the provided data.
+     * Only non-null fields will be modified.
+     */
+    @Operation(
+            summary = "Update a search profile",
+            description = "Updates an existing search profile with the provided data. " +
+                    "Only non-null fields in the request will be modified."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Search profile updated successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ApiResponseDto.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid request data",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Search profile not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @PutMapping("/search-profile/{id}")
+    public Callable<ResponseEntity<ApiResponseDto<SearchProfileResponseDto>>> updateSearchProfile(
+            @PathVariable UUID id,
+            @Valid @RequestBody UpdateSearchProfileRequestDto request) {
+        return () -> {
+            SearchProfileResponseDto updatedProfile = updateSearchProfileService.updateSearchProfile(id, request);
+            return ResponseEntity.ok(ApiResponseDto.success(updatedProfile, "Search profile updated successfully"));
+        };
+    }
+
+    /**
+     * Deletes a search profile by its unique identifier.
+     */
+    @Operation(
+            summary = "Delete a search profile",
+            description = "Permanently deletes a search profile and all associated skill tags using its unique identifier."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Search profile deleted successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ApiResponseDto.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Search profile not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @DeleteMapping("/search-profile/{id}")
+    public Callable<ResponseEntity<ApiResponseDto<Void>>> deleteSearchProfile(@PathVariable UUID id) {
+        return () -> {
+            deleteSearchProfileService.deleteSearchProfile(id);
+            return ResponseEntity.ok(ApiResponseDto.success(null, "Search profile deleted successfully"));
         };
     }
 

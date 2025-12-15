@@ -3,8 +3,11 @@ package rmit.saintgiong.discoveryservice.searchprofile.mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import rmit.saintgiong.discoveryapi.internal.dto.CreateSearchProfileRequestDto;
+import rmit.saintgiong.discoveryapi.internal.dto.UpdateSearchProfileRequestDto;
 import rmit.saintgiong.discoveryapi.internal.dto.SearchProfileResponseDto;
 import rmit.saintgiong.discoveryservice.common.degree.type.DegreeType;
 import rmit.saintgiong.discoveryservice.common.degree.type.EmploymentTypeEnum;
@@ -92,6 +95,23 @@ public abstract class SearchProfileMapper {
     @Mapping(target = "employmentType", source = "employmentTypes", qualifiedByName = "mapStringsToBitSet")
     @Mapping(target = "highestDegree", source = "highestDegree", qualifiedByName = "mapStringToDegreeType")
     public abstract SearchProfileEntity requestDtoToEntity(CreateSearchProfileRequestDto dto);
+
+    /**
+     * Updates an existing SearchProfileEntity with non-null values from UpdateSearchProfileRequestDto.
+     * Uses partial update strategy - only non-null fields in the DTO will overwrite entity fields.
+     *
+     * @param dto    the update request DTO containing fields to update
+     * @param entity the existing entity to be updated
+     */
+    @Mapping(target = "profileId", ignore = true) // ID should not be changed
+    @Mapping(target = "skillTags", ignore = true) // Handled separately in Service
+    @Mapping(target = "companyId", ignore = true) // Company ownership should not change
+    @Mapping(target = "employmentType", source = "employmentTypes", qualifiedByName = "mapStringsToBitSet", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "highestDegree", source = "highestDegree", qualifiedByName = "mapStringToDegreeType", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "salaryMin", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "salaryMax", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "country", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    public abstract void updateEntityFromDto(UpdateSearchProfileRequestDto dto, @MappingTarget SearchProfileEntity entity);
 
     /**
      * Converts a degree type string to DegreeType enum.
