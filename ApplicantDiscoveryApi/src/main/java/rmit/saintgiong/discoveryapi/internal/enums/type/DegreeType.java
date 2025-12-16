@@ -1,4 +1,4 @@
-package rmit.saintgiong.discoveryservice.common.degree.type;
+package rmit.saintgiong.discoveryapi.internal.enums.type;
 
 // Enum representing degree types.
 public enum DegreeType {

@@ -1,4 +1,4 @@
-package rmit.saintgiong.discoveryservice.common.dto;
+package rmit.saintgiong.discoveryapi.internal.dto.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

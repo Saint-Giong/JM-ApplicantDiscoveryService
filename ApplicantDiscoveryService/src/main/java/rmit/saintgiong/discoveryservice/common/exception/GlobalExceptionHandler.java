@@ -9,7 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
-import rmit.saintgiong.discoveryservice.common.dto.ErrorResponseDto;
+import rmit.saintgiong.discoveryapi.internal.dto.common.ErrorResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

@@ -1,8 +1,9 @@
-package rmit.saintgiong.discoveryapi.internal.validation;
+package rmit.saintgiong.discoveryapi.internal.validators.constraints;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.extern.slf4j.Slf4j;
+import rmit.saintgiong.discoveryapi.internal.validators.annotations.ValidSalaryRange;
 
 import java.lang.reflect.Method;
 

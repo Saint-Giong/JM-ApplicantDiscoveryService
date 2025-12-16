@@ -1,4 +1,4 @@
-package rmit.saintgiong.discoveryservice.common.degree.type;
+package rmit.saintgiong.discoveryapi.internal.enums.type;
 
 public enum EmploymentTypeEnum {
     FULL_TIME(0),

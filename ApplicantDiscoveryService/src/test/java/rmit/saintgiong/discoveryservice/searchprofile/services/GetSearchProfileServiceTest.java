@@ -10,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import rmit.saintgiong.discoveryapi.internal.dto.SearchProfileResponseDto;
-import rmit.saintgiong.discoveryservice.common.degree.type.DegreeType;
+import rmit.saintgiong.discoveryapi.internal.enums.type.DegreeType;
 import rmit.saintgiong.discoveryservice.searchprofile.entity.SearchProfileEntity;
 import rmit.saintgiong.discoveryservice.searchprofile.mapper.SearchProfileMapper;
 

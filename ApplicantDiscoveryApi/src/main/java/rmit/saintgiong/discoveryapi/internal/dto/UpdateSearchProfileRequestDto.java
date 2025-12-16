@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import rmit.saintgiong.discoveryapi.internal.validation.ValidSalaryRange;
+import rmit.saintgiong.discoveryapi.internal.validators.annotations.ValidSalaryRange;
 
 import java.util.Set;
 import java.util.UUID;

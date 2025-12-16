@@ -1,4 +1,4 @@
-package rmit.saintgiong.discoveryservice.common.auth.type;
+package rmit.saintgiong.discoveryapi.internal.enums.auth;
 
 // Enum representing user roles in the system.
 public enum Role {

@@ -3,7 +3,7 @@ package rmit.saintgiong.discoveryservice.searchprofile.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import rmit.saintgiong.discoveryservice.common.degree.type.DegreeType;
+import rmit.saintgiong.discoveryapi.internal.enums.type.DegreeType;
 
 import java.util.BitSet;
 import java.util.HashSet;

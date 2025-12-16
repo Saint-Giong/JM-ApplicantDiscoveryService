@@ -1,4 +1,4 @@
-package rmit.saintgiong.discoveryservice.common.dto;
+package rmit.saintgiong.discoveryapi.internal.dto.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
