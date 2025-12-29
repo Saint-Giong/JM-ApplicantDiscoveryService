@@ -51,7 +51,7 @@ kafka:
 
 springdoc:
   api-docs:
-    path: /v3/api-docs
+    path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
     enabled: true
