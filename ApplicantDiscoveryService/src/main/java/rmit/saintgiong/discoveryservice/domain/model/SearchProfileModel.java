@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import rmit.saintgiong.discoveryapi.internal.common.enums.type.DegreeType;
+import rmit.saintgiong.discoveryapi.internal.common.types.type.DegreeType;
 
 import java.util.BitSet;
 import java.util.Set;
