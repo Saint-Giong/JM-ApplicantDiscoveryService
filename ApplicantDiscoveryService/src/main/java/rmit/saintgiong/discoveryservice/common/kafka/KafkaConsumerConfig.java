@@ -25,57 +25,60 @@ import java.util.Map;
 @EnableKafka
 public class KafkaConsumerConfig {
 
-   @Value("${kafka.kafka-host-url}")
-   private String kafkaHostUrl;
+    @Value("${kafka.kafka-host-url}")
+    private String kafkaHostUrl;
 
-   @Value("${kafka.schema-registry-host-url}")
-   private String schemaRegistryHostUrl;
+    @Value("${kafka.schema-registry-host-url}")
+    private String schemaRegistryHostUrl;
 
-   @Bean
-   public ConsumerFactory<String, Object> notificationConsumerFactory() {
-       Map<String, Object> props = new HashMap<>();
-       props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaHostUrl);
-       props.put(ConsumerConfig.GROUP_ID_CONFIG, "notification-service-consumer-group");
-       props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-       props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class);
+    @Value("${spring.application.name}")
+    private String serviceName;
 
-       // Config Schema Registry
-       props.put("schema.registry.url", schemaRegistryHostUrl);
+    @Bean
+    public ConsumerFactory<String, Object> discoveryConsumerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaHostUrl);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, serviceName + "-consumer-group");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class);
 
-       // 6. CỰC KỲ QUAN TRỌNG: Dòng này bảo nó map về đúng class Java (BirdAvro)
-       // Nếu thiếu dòng này, nó sẽ trả về GenericRecord và lại gây lỗi khác.
-       props.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, true);
+        // Config Schema Registry
+        props.put("schema.registry.url", schemaRegistryHostUrl);
 
-       // 7. Cho phép đọc từ đầu nếu không tìm thấy offset (tránh lỗi offset out of range)
-       props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        // 6. CỰC KỲ QUAN TRỌNG: Dòng này bảo nó map về đúng class Java (BirdAvro)
+        // Nếu thiếu dòng này, nó sẽ trả về GenericRecord và lại gây lỗi khác.
+        props.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, true);
 
-       return new DefaultKafkaConsumerFactory<>(props);
-   }
+        // 7. Cho phép đọc từ đầu nếu không tìm thấy offset (tránh lỗi offset out of range)
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
-   @Bean
-   public ConcurrentKafkaListenerContainerFactory<String, Object> notificationKafkaListenerContainerFactory(KafkaTemplate<String, Object> kafkaTemplate) {
-       ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
-       factory.setConsumerFactory(notificationConsumerFactory());
-       factory.setReplyTemplate(kafkaTemplate);
-       return factory;
-   }
+        return new DefaultKafkaConsumerFactory<>(props);
+    }
 
-   @Bean
-   public ConcurrentMessageListenerContainer<String, Object> replyContainer(ConsumerFactory<String, Object> consumerFactory) {
-       ContainerProperties containerProperties = new ContainerProperties(
-        KafkaTopic.NEW_APPLICANT_TOPIC_REPLIED,
-        KafkaTopic.EDIT_APPLICANT_TOPIC_REPLIED
-       );
-       containerProperties.setGroupId("notification-service-reply-group");
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Object> discoveryKafkaListenerContainerFactory(KafkaTemplate<String, Object> kafkaTemplate) {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(discoveryConsumerFactory());
+        factory.setReplyTemplate(kafkaTemplate);
+        return factory;
+    }
 
-       return new ConcurrentMessageListenerContainer<>(consumerFactory, containerProperties);
-   }
+    @Bean
+    public ConcurrentMessageListenerContainer<String, Object> replyContainer(ConsumerFactory<String, Object> consumerFactory) {
+        ContainerProperties containerProperties = new ContainerProperties(
+                KafkaTopic.NEW_APPLICANT_TOPIC_REPLIED,
+                KafkaTopic.EDIT_APPLICANT_TOPIC_REPLIED
+        );
+        containerProperties.setGroupId(serviceName + "-reply-group");
 
-   @Bean
-   public ReplyingKafkaTemplate<String, Object, Object> replyingKafkaTemplate(
-           ProducerFactory<String, Object> pf,
-           ConcurrentMessageListenerContainer<String, Object> replyContainer) {
+        return new ConcurrentMessageListenerContainer<>(consumerFactory, containerProperties);
+    }
 
-       return new ReplyingKafkaTemplate<>(pf, replyContainer);
-   }
+    @Bean
+    public ReplyingKafkaTemplate<String, Object, Object> replyingKafkaTemplate(
+            ProducerFactory<String, Object> pf,
+            ConcurrentMessageListenerContainer<String, Object> replyContainer) {
+
+        return new ReplyingKafkaTemplate<>(pf, replyContainer);
+    }
 }
