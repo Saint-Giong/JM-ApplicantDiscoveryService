@@ -23,7 +23,7 @@ public class KafkaProducerConfig {
    private String schemaRegistryHostUrl;
 
    @Bean
-   public ProducerFactory<String, Object> notificationProducerFactory() {
+   public ProducerFactory<String, Object> discoveryProducerFactory() {
        Map<String, Object> props = new HashMap<>();
 
        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaHostUrl);
@@ -38,6 +38,6 @@ public class KafkaProducerConfig {
 
    @Bean
    public KafkaTemplate<String, Object> kafkaTemplate() {
-       return new KafkaTemplate<>(notificationProducerFactory());
+       return new KafkaTemplate<>(discoveryProducerFactory());
    }
 }
