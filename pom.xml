@@ -46,8 +46,17 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>devision.saintgiong</groupId>
+            <artifactId>sg-shared-dto-package</artifactId>
+            <version>0.0.1-SNAPSHOT-19394905012026</version>
         </dependency>
     </dependencies>
     <build>

@@ -1,6 +1,8 @@
 package rmit.saintgiong.discoveryservice.common.exception;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +11,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
-import rmit.saintgiong.discoveryapi.internal.dto.common.ErrorResponseDto;
+import rmit.saintgiong.discoveryservice.common.exception.token.InvalidCredentialsException;
+import rmit.saintgiong.discoveryservice.common.exception.token.InvalidTokenException;
+import rmit.saintgiong.discoveryservice.common.exception.token.TokenExpiredException;
+import rmit.saintgiong.discoveryservice.common.exception.token.TokenReuseException;
+import rmit.saintgiong.shared.response.ErrorResponseDto;
+import rmit.saintgiong.shared.type.CookieType;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -120,4 +127,87 @@ public class GlobalExceptionHandler {
                 .body(errorResponseDto);
     }
 
+    @ExceptionHandler(TokenExpiredException.class)
+    public ResponseEntity<ErrorResponseDto> handleTokenExpiredException(
+            TokenExpiredException exception,
+            WebRequest request
+    ) {
+        ErrorResponseDto errorResponseDto = ErrorResponseDto.builder()
+                .apiPath(request.getDescription(false).replace("uri=", ""))
+                .errorCode(HttpStatus.UNAUTHORIZED)
+                .message(exception.getMessage())
+                .timeStamp(LocalDateTime.now())
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(errorResponseDto);
+    }
+
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<ErrorResponseDto> handleInvalidTokenException(
+            InvalidTokenException exception,
+            WebRequest request
+    ) {
+        ErrorResponseDto errorResponseDto = ErrorResponseDto.builder()
+                .apiPath(request.getDescription(false).replace("uri=", ""))
+                .errorCode(HttpStatus.UNAUTHORIZED)
+                .message(exception.getMessage())
+                .timeStamp(LocalDateTime.now())
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(errorResponseDto);
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ErrorResponseDto> handleInvalidCredentialsException(
+            InvalidCredentialsException exception,
+            WebRequest request
+    ) {
+        ErrorResponseDto errorResponseDto = ErrorResponseDto.builder()
+                .apiPath(request.getDescription(false).replace("uri=", ""))
+                .errorCode(HttpStatus.UNAUTHORIZED)
+                .message(exception.getMessage())
+                .timeStamp(LocalDateTime.now())
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(errorResponseDto);
+    }
+
+    @ExceptionHandler(TokenReuseException.class)
+    public ResponseEntity<ErrorResponseDto> handleTokenReuseException(
+            TokenReuseException exception,
+            WebRequest request,
+            HttpServletResponse response
+    ) {
+        log.warn("Token reuse detected: {}", exception.getMessage());
+        Cookie accessCookie = new Cookie(CookieType.ACCESS_TOKEN, "");
+        accessCookie.setHttpOnly(true);
+        accessCookie.setSecure(true);
+        accessCookie.setPath("/");
+        accessCookie.setMaxAge(0);
+        response.addCookie(accessCookie);
+
+        Cookie refreshCookie = new Cookie(CookieType.REFRESH_TOKEN, "");
+        refreshCookie.setHttpOnly(true);
+        refreshCookie.setSecure(true);
+        refreshCookie.setPath("/");
+        refreshCookie.setMaxAge(0);
+        response.addCookie(refreshCookie);
+
+        ErrorResponseDto errorResponseDto = ErrorResponseDto.builder()
+                .apiPath(request.getDescription(false).replace("uri=", ""))
+                .errorCode(HttpStatus.UNAUTHORIZED)
+                .message(exception.getMessage())
+                .timeStamp(LocalDateTime.now())
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(errorResponseDto);
+    }
 }

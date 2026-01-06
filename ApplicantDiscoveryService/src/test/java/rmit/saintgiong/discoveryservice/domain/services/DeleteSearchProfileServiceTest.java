@@ -1,4 +1,4 @@
-package rmit.saintgiong.discoveryservice.searchprofile.services;
+package rmit.saintgiong.discoveryservice.domain.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;

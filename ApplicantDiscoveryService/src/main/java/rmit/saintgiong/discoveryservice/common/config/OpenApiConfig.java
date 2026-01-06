@@ -1,5 +1,7 @@
 package rmit.saintgiong.discoveryservice.common.config;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -7,18 +9,16 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
-import io.swagger.v3.oas.models.servers.Server;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.List;
-
+// OpenAPI/Swagger configuration for API documentation.
 @Configuration
-public class SwaggerConfig {
-
-    @Value("${server.port:8080}")
-    private String serverPort;
+@OpenAPIDefinition(servers = {
+        @Server(url = "/v1/discovery/", description = "To Gateway Endpoint"),
+        @Server(url = "http://localhost:${server.port}", description = "Direct Discovery URL")
+})
+public class OpenApiConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {

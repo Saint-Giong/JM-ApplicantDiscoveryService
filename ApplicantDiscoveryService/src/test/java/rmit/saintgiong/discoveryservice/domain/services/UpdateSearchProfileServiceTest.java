@@ -1,4 +1,4 @@
-package rmit.saintgiong.discoveryservice.searchprofile.services;
+package rmit.saintgiong.discoveryservice.domain.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,12 +9,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import rmit.saintgiong.discoveryapi.internal.dto.SearchProfileResponseDto;
-import rmit.saintgiong.discoveryapi.internal.dto.UpdateSearchProfileRequestDto;
-import rmit.saintgiong.discoveryapi.internal.enums.type.DegreeType;
-import rmit.saintgiong.discoveryservice.searchprofile.entity.SearchProfileEntity;
-import rmit.saintgiong.discoveryservice.searchprofile.entity.SearchProfile_SkillTagEntity;
-import rmit.saintgiong.discoveryservice.searchprofile.mapper.SearchProfileMapper;
+import rmit.saintgiong.discoveryapi.internal.common.dto.SearchProfileResponseDto;
+import rmit.saintgiong.discoveryapi.internal.common.dto.UpdateSearchProfileRequestDto;
+import rmit.saintgiong.discoveryapi.internal.common.types.type.DegreeType;
+import rmit.saintgiong.discoveryservice.domain.entity.SearchProfileEntity;
+import rmit.saintgiong.discoveryservice.domain.entity.SearchProfile_SkillTagEntity;
+import rmit.saintgiong.discoveryservice.domain.mapper.SearchProfileMapper;
 
 import java.util.BitSet;
 import java.util.HashSet;
