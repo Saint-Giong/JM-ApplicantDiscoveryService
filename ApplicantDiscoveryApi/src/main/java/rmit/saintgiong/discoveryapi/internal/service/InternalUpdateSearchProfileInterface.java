@@ -1,7 +1,7 @@
 package rmit.saintgiong.discoveryapi.internal.service;
 
-import rmit.saintgiong.discoveryapi.internal.dto.SearchProfileResponseDto;
-import rmit.saintgiong.discoveryapi.internal.dto.UpdateSearchProfileRequestDto;
+import rmit.saintgiong.discoveryapi.internal.common.dto.SearchProfileResponseDto;
+import rmit.saintgiong.discoveryapi.internal.common.dto.UpdateSearchProfileRequestDto;
 
 import java.util.UUID;
 
