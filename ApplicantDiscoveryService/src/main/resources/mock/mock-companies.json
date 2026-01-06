@@ -1,0 +1,79 @@
+[
+    {
+        "companyId": "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
+        "name": "TechCorp Solutions",
+        "phone": "+1555000001",
+        "address": "100 Technology Drive, Building A",
+        "city": "San Francisco",
+        "aboutUs": "Leading provider of enterprise cloud solutions. We help businesses transform digitally with cutting-edge technology and innovative approaches.",
+        "admissionDescription": "We are looking for passionate individuals who want to make an impact in the tech industry. Join our team of innovators!",
+        "logoUrl": "https://example.com/logos/techcorp.png",
+        "country": "USA"
+    },
+    {
+        "companyId": "d2e3f4a5-b6c7-5d8e-9f0a-1b2c3d4e5f6a",
+        "name": "InnovateLabs Inc",
+        "phone": "+1555000002",
+        "address": "200 Innovation Boulevard",
+        "city": "New York",
+        "aboutUs": "A research and development company focused on artificial intelligence and machine learning solutions for healthcare and finance.",
+        "admissionDescription": "Join our R&D team working on breakthrough AI technologies that will shape the future of healthcare.",
+        "logoUrl": "https://example.com/logos/innovatelabs.png",
+        "country": "USA"
+    },
+    {
+        "companyId": "e3f4a5b6-c7d8-6e9f-0a1b-2c3d4e5f6a7b",
+        "name": "CloudNine Technologies",
+        "phone": "+1555000003",
+        "address": "300 Cloud Street, Floor 15",
+        "city": "Seattle",
+        "aboutUs": "Specializing in cloud infrastructure and DevOps solutions. We build scalable, reliable systems for clients worldwide.",
+        "admissionDescription": "Looking for cloud architects and DevOps engineers to help build the next generation of cloud platforms.",
+        "logoUrl": "https://example.com/logos/cloudnine.png",
+        "country": "USA"
+    },
+    {
+        "companyId": "f4a5b6c7-d8e9-7f0a-1b2c-3d4e5f6a7b8c",
+        "name": "DataDynamics Corp",
+        "phone": "+1555000004",
+        "address": "400 Analytics Avenue",
+        "city": "Austin",
+        "aboutUs": "Big data analytics company helping businesses make data-driven decisions. We process billions of data points daily.",
+        "admissionDescription": "Seeking data scientists and engineers to work on large-scale analytics platforms and machine learning pipelines.",
+        "logoUrl": "https://example.com/logos/datadynamics.png",
+        "country": "USA"
+    },
+    {
+        "companyId": "a5b6c7d8-e9f0-8a1b-2c3d-4e5f6a7b8c9d",
+        "name": "SecureShield Systems",
+        "phone": "+1555000005",
+        "address": "500 Security Plaza",
+        "city": "Boston",
+        "aboutUs": "Cybersecurity firm providing comprehensive security solutions including penetration testing, threat detection, and security consulting.",
+        "admissionDescription": "Join our elite security team to protect organizations from cyber threats and build next-gen security tools.",
+        "logoUrl": "https://example.com/logos/secureshield.png",
+        "country": "USA"
+    },
+    {
+        "companyId": "b6c7d8e9-f0a1-9b2c-3d4e-5f6a7b8c9d0e",
+        "name": "MobileFirst Studios",
+        "phone": "+1555000006",
+        "address": "600 App Development Lane",
+        "city": "Los Angeles",
+        "aboutUs": "Mobile app development studio creating award-winning iOS and Android applications for global brands.",
+        "admissionDescription": "Looking for creative mobile developers to build the next generation of mobile experiences.",
+        "logoUrl": "https://example.com/logos/mobilefirst.png",
+        "country": "USA"
+    },
+    {
+        "companyId": "c7d8e9f0-a1b2-0c3d-4e5f-6a7b8c9d0e1f",
+        "name": "GreenTech Innovations",
+        "phone": "+1555000007",
+        "address": "700 Sustainability Street",
+        "city": "Portland",
+        "aboutUs": "Technology company focused on sustainable solutions and green energy management systems.",
+        "admissionDescription": "Join us in building technology that makes a positive impact on the environment and society.",
+        "logoUrl": "https://example.com/logos/greentech.png",
+        "country": "USA"
+    }
+]

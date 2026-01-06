@@ -1,0 +1,1178 @@
+[
+  {
+    "code": "AF",
+    "name": "Afghanistan",
+    "dialCode": "+93",
+    "shardId": 5
+  },
+  {
+    "code": "AL",
+    "name": "Albania",
+    "dialCode": "+355",
+    "shardId": 2
+  },
+  {
+    "code": "DZ",
+    "name": "Algeria",
+    "dialCode": "+213",
+    "shardId": 1
+  },
+  {
+    "code": "AD",
+    "name": "Andorra",
+    "dialCode": "+376",
+    "shardId": 2
+  },
+  {
+    "code": "AO",
+    "name": "Angola",
+    "dialCode": "+244",
+    "shardId": 1
+  },
+  {
+    "code": "AG",
+    "name": "Antigua and Barbuda",
+    "dialCode": "+1-268",
+    "shardId": 3
+  },
+  {
+    "code": "AR",
+    "name": "Argentina",
+    "dialCode": "+54",
+    "shardId": 3
+  },
+  {
+    "code": "AM",
+    "name": "Armenia",
+    "dialCode": "+374",
+    "shardId": 5
+  },
+  {
+    "code": "AU",
+    "name": "Australia",
+    "dialCode": "+61",
+    "shardId": 5
+  },
+  {
+    "code": "AT",
+    "name": "Austria",
+    "dialCode": "+43",
+    "shardId": 2
+  },
+  {
+    "code": "AZ",
+    "name": "Azerbaijan",
+    "dialCode": "+994",
+    "shardId": 5
+  },
+  {
+    "code": "BS",
+    "name": "Bahamas",
+    "dialCode": "+1-242",
+    "shardId": 3
+  },
+  {
+    "code": "BH",
+    "name": "Bahrain",
+    "dialCode": "+973",
+    "shardId": 5
+  },
+  {
+    "code": "BD",
+    "name": "Bangladesh",
+    "dialCode": "+880",
+    "shardId": 5
+  },
+  {
+    "code": "BB",
+    "name": "Barbados",
+    "dialCode": "+1-246",
+    "shardId": 3
+  },
+  {
+    "code": "BY",
+    "name": "Belarus",
+    "dialCode": "+375",
+    "shardId": 2
+  },
+  {
+    "code": "BE",
+    "name": "Belgium",
+    "dialCode": "+32",
+    "shardId": 2
+  },
+  {
+    "code": "BZ",
+    "name": "Belize",
+    "dialCode": "+501",
+    "shardId": 3
+  },
+  {
+    "code": "BJ",
+    "name": "Benin",
+    "dialCode": "+229",
+    "shardId": 1
+  },
+  {
+    "code": "BT",
+    "name": "Bhutan",
+    "dialCode": "+975",
+    "shardId": 5
+  },
+  {
+    "code": "BO",
+    "name": "Bolivia",
+    "dialCode": "+591",
+    "shardId": 3
+  },
+  {
+    "code": "BA",
+    "name": "Bosnia and Herzegovina",
+    "dialCode": "+387",
+    "shardId": 2
+  },
+  {
+    "code": "BW",
+    "name": "Botswana",
+    "dialCode": "+267",
+    "shardId": 1
+  },
+  {
+    "code": "BR",
+    "name": "Brazil",
+    "dialCode": "+55",
+    "shardId": 3
+  },
+  {
+    "code": "BN",
+    "name": "Brunei",
+    "dialCode": "+673",
+    "shardId": 5
+  },
+  {
+    "code": "BG",
+    "name": "Bulgaria",
+    "dialCode": "+359",
+    "shardId": 2
+  },
+  {
+    "code": "BF",
+    "name": "Burkina Faso",
+    "dialCode": "+226",
+    "shardId": 1
+  },
+  {
+    "code": "BI",
+    "name": "Burundi",
+    "dialCode": "+257",
+    "shardId": 1
+  },
+  {
+    "code": "CV",
+    "name": "Cabo Verde",
+    "dialCode": "+238",
+    "shardId": 1
+  },
+  {
+    "code": "KH",
+    "name": "Cambodia",
+    "dialCode": "+855",
+    "shardId": 5
+  },
+  {
+    "code": "CM",
+    "name": "Cameroon",
+    "dialCode": "+237",
+    "shardId": 1
+  },
+  {
+    "code": "CA",
+    "name": "Canada",
+    "dialCode": "+1",
+    "shardId": 3
+  },
+  {
+    "code": "CF",
+    "name": "Central African Republic",
+    "dialCode": "+236",
+    "shardId": 1
+  },
+  {
+    "code": "TD",
+    "name": "Chad",
+    "dialCode": "+235",
+    "shardId": 1
+  },
+  {
+    "code": "CL",
+    "name": "Chile",
+    "dialCode": "+56",
+    "shardId": 3
+  },
+  {
+    "code": "CN",
+    "name": "China",
+    "dialCode": "+86",
+    "shardId": 4
+  },
+  {
+    "code": "CO",
+    "name": "Colombia",
+    "dialCode": "+57",
+    "shardId": 3
+  },
+  {
+    "code": "KM",
+    "name": "Comoros",
+    "dialCode": "+269",
+    "shardId": 1
+  },
+  {
+    "code": "CG",
+    "name": "Congo (Congo-Brazzaville)",
+    "dialCode": "+242",
+    "shardId": 1
+  },
+  {
+    "code": "CR",
+    "name": "Costa Rica",
+    "dialCode": "+506",
+    "shardId": 3
+  },
+  {
+    "code": "HR",
+    "name": "Croatia",
+    "dialCode": "+385",
+    "shardId": 2
+  },
+  {
+    "code": "CU",
+    "name": "Cuba",
+    "dialCode": "+53",
+    "shardId": 3
+  },
+  {
+    "code": "CY",
+    "name": "Cyprus",
+    "dialCode": "+357",
+    "shardId": 2
+  },
+  {
+    "code": "CZ",
+    "name": "Czechia (Czech Republic)",
+    "dialCode": "+420",
+    "shardId": 2
+  },
+  {
+    "code": "CD",
+    "name": "Democratic Republic of the Congo",
+    "dialCode": "+243",
+    "shardId": 1
+  },
+  {
+    "code": "DK",
+    "name": "Denmark",
+    "dialCode": "+45",
+    "shardId": 2
+  },
+  {
+    "code": "DJ",
+    "name": "Djibouti",
+    "dialCode": "+253",
+    "shardId": 1
+  },
+  {
+    "code": "DM",
+    "name": "Dominica",
+    "dialCode": "+1-767",
+    "shardId": 3
+  },
+  {
+    "code": "DO",
+    "name": "Dominican Republic",
+    "dialCode": "+1-809",
+    "shardId": 3
+  },
+  {
+    "code": "EC",
+    "name": "Ecuador",
+    "dialCode": "+593",
+    "shardId": 3
+  },
+  {
+    "code": "EG",
+    "name": "Egypt",
+    "dialCode": "+20",
+    "shardId": 1
+  },
+  {
+    "code": "SV",
+    "name": "El Salvador",
+    "dialCode": "+503",
+    "shardId": 3
+  },
+  {
+    "code": "GQ",
+    "name": "Equatorial Guinea",
+    "dialCode": "+240",
+    "shardId": 1
+  },
+  {
+    "code": "ER",
+    "name": "Eritrea",
+    "dialCode": "+291",
+    "shardId": 1
+  },
+  {
+    "code": "EE",
+    "name": "Estonia",
+    "dialCode": "+372",
+    "shardId": 2
+  },
+  {
+    "code": "SZ",
+    "name": "Eswatini",
+    "dialCode": "+268",
+    "shardId": 1
+  },
+  {
+    "code": "ET",
+    "name": "Ethiopia",
+    "dialCode": "+251",
+    "shardId": 1
+  },
+  {
+    "code": "FJ",
+    "name": "Fiji",
+    "dialCode": "+679",
+    "shardId": 5
+  },
+  {
+    "code": "FI",
+    "name": "Finland",
+    "dialCode": "+358",
+    "shardId": 2
+  },
+  {
+    "code": "FR",
+    "name": "France",
+    "dialCode": "+33",
+    "shardId": 2
+  },
+  {
+    "code": "GA",
+    "name": "Gabon",
+    "dialCode": "+241",
+    "shardId": 1
+  },
+  {
+    "code": "GM",
+    "name": "Gambia",
+    "dialCode": "+220",
+    "shardId": 1
+  },
+  {
+    "code": "GE",
+    "name": "Georgia",
+    "dialCode": "+995",
+    "shardId": 2
+  },
+  {
+    "code": "DE",
+    "name": "Germany",
+    "dialCode": "+49",
+    "shardId": 2
+  },
+  {
+    "code": "GH",
+    "name": "Ghana",
+    "dialCode": "+233",
+    "shardId": 1
+  },
+  {
+    "code": "GR",
+    "name": "Greece",
+    "dialCode": "+30",
+    "shardId": 2
+  },
+  {
+    "code": "GD",
+    "name": "Grenada",
+    "dialCode": "+1-473",
+    "shardId": 3
+  },
+  {
+    "code": "GT",
+    "name": "Guatemala",
+    "dialCode": "+502",
+    "shardId": 3
+  },
+  {
+    "code": "GN",
+    "name": "Guinea",
+    "dialCode": "+224",
+    "shardId": 1
+  },
+  {
+    "code": "GW",
+    "name": "Guinea-Bissau",
+    "dialCode": "+245",
+    "shardId": 1
+  },
+  {
+    "code": "GY",
+    "name": "Guyana",
+    "dialCode": "+592",
+    "shardId": 3
+  },
+  {
+    "code": "HT",
+    "name": "Haiti",
+    "dialCode": "+509",
+    "shardId": 3
+  },
+  {
+    "code": "HN",
+    "name": "Honduras",
+    "dialCode": "+504",
+    "shardId": 3
+  },
+  {
+    "code": "HU",
+    "name": "Hungary",
+    "dialCode": "+36",
+    "shardId": 2
+  },
+  {
+    "code": "IS",
+    "name": "Iceland",
+    "dialCode": "+354",
+    "shardId": 2
+  },
+  {
+    "code": "IN",
+    "name": "India",
+    "dialCode": "+91",
+    "shardId": 5
+  },
+  {
+    "code": "ID",
+    "name": "Indonesia",
+    "dialCode": "+62",
+    "shardId": 5
+  },
+  {
+    "code": "IR",
+    "name": "Iran",
+    "dialCode": "+98",
+    "shardId": 5
+  },
+  {
+    "code": "IQ",
+    "name": "Iraq",
+    "dialCode": "+964",
+    "shardId": 5
+  },
+  {
+    "code": "IE",
+    "name": "Ireland",
+    "dialCode": "+353",
+    "shardId": 2
+  },
+  {
+    "code": "IL",
+    "name": "Israel",
+    "dialCode": "+972",
+    "shardId": 5
+  },
+  {
+    "code": "IT",
+    "name": "Italy",
+    "dialCode": "+39",
+    "shardId": 2
+  },
+  {
+    "code": "CI",
+    "name": "Ivory Coast",
+    "dialCode": "+225",
+    "shardId": 1
+  },
+  {
+    "code": "JM",
+    "name": "Jamaica",
+    "dialCode": "+1-876",
+    "shardId": 3
+  },
+  {
+    "code": "JP",
+    "name": "Japan",
+    "dialCode": "+81",
+    "shardId": 4
+  },
+  {
+    "code": "JO",
+    "name": "Jordan",
+    "dialCode": "+962",
+    "shardId": 5
+  },
+  {
+    "code": "KZ",
+    "name": "Kazakhstan",
+    "dialCode": "+7",
+    "shardId": 5
+  },
+  {
+    "code": "KE",
+    "name": "Kenya",
+    "dialCode": "+254",
+    "shardId": 1
+  },
+  {
+    "code": "KI",
+    "name": "Kiribati",
+    "dialCode": "+686",
+    "shardId": 5
+  },
+  {
+    "code": "KW",
+    "name": "Kuwait",
+    "dialCode": "+965",
+    "shardId": 5
+  },
+  {
+    "code": "KG",
+    "name": "Kyrgyzstan",
+    "dialCode": "+996",
+    "shardId": 5
+  },
+  {
+    "code": "LA",
+    "name": "Laos",
+    "dialCode": "+856",
+    "shardId": 5
+  },
+  {
+    "code": "LV",
+    "name": "Latvia",
+    "dialCode": "+371",
+    "shardId": 2
+  },
+  {
+    "code": "LB",
+    "name": "Lebanon",
+    "dialCode": "+961",
+    "shardId": 5
+  },
+  {
+    "code": "LS",
+    "name": "Lesotho",
+    "dialCode": "+266",
+    "shardId": 1
+  },
+  {
+    "code": "LR",
+    "name": "Liberia",
+    "dialCode": "+231",
+    "shardId": 1
+  },
+  {
+    "code": "LY",
+    "name": "Libya",
+    "dialCode": "+218",
+    "shardId": 1
+  },
+  {
+    "code": "LI",
+    "name": "Liechtenstein",
+    "dialCode": "+423",
+    "shardId": 2
+  },
+  {
+    "code": "LT",
+    "name": "Lithuania",
+    "dialCode": "+370",
+    "shardId": 2
+  },
+  {
+    "code": "LU",
+    "name": "Luxembourg",
+    "dialCode": "+352",
+    "shardId": 2
+  },
+  {
+    "code": "MG",
+    "name": "Madagascar",
+    "dialCode": "+261",
+    "shardId": 1
+  },
+  {
+    "code": "MW",
+    "name": "Malawi",
+    "dialCode": "+265",
+    "shardId": 1
+  },
+  {
+    "code": "MY",
+    "name": "Malaysia",
+    "dialCode": "+60",
+    "shardId": 5
+  },
+  {
+    "code": "MV",
+    "name": "Maldives",
+    "dialCode": "+960",
+    "shardId": 5
+  },
+  {
+    "code": "ML",
+    "name": "Mali",
+    "dialCode": "+223",
+    "shardId": 1
+  },
+  {
+    "code": "MT",
+    "name": "Malta",
+    "dialCode": "+356",
+    "shardId": 2
+  },
+  {
+    "code": "MH",
+    "name": "Marshall Islands",
+    "dialCode": "+692",
+    "shardId": 5
+  },
+  {
+    "code": "MR",
+    "name": "Mauritania",
+    "dialCode": "+222",
+    "shardId": 1
+  },
+  {
+    "code": "MU",
+    "name": "Mauritius",
+    "dialCode": "+230",
+    "shardId": 1
+  },
+  {
+    "code": "MX",
+    "name": "Mexico",
+    "dialCode": "+52",
+    "shardId": 3
+  },
+  {
+    "code": "FM",
+    "name": "Micronesia",
+    "dialCode": "+691",
+    "shardId": 5
+  },
+  {
+    "code": "MD",
+    "name": "Moldova",
+    "dialCode": "+373",
+    "shardId": 2
+  },
+  {
+    "code": "MC",
+    "name": "Monaco",
+    "dialCode": "+377",
+    "shardId": 2
+  },
+  {
+    "code": "MN",
+    "name": "Mongolia",
+    "dialCode": "+976",
+    "shardId": 4
+  },
+  {
+    "code": "ME",
+    "name": "Montenegro",
+    "dialCode": "+382",
+    "shardId": 2
+  },
+  {
+    "code": "MA",
+    "name": "Morocco",
+    "dialCode": "+212",
+    "shardId": 1
+  },
+  {
+    "code": "MZ",
+    "name": "Mozambique",
+    "dialCode": "+258",
+    "shardId": 1
+  },
+  {
+    "code": "MM",
+    "name": "Myanmar",
+    "dialCode": "+95",
+    "shardId": 5
+  },
+  {
+    "code": "NA",
+    "name": "Namibia",
+    "dialCode": "+264",
+    "shardId": 1
+  },
+  {
+    "code": "NR",
+    "name": "Nauru",
+    "dialCode": "+674",
+    "shardId": 5
+  },
+  {
+    "code": "NP",
+    "name": "Nepal",
+    "dialCode": "+977",
+    "shardId": 5
+  },
+  {
+    "code": "NL",
+    "name": "Netherlands",
+    "dialCode": "+31",
+    "shardId": 2
+  },
+  {
+    "code": "NZ",
+    "name": "New Zealand",
+    "dialCode": "+64",
+    "shardId": 5
+  },
+  {
+    "code": "NI",
+    "name": "Nicaragua",
+    "dialCode": "+505",
+    "shardId": 3
+  },
+  {
+    "code": "NE",
+    "name": "Niger",
+    "dialCode": "+227",
+    "shardId": 1
+  },
+  {
+    "code": "NG",
+    "name": "Nigeria",
+    "dialCode": "+234",
+    "shardId": 1
+  },
+  {
+    "code": "KP",
+    "name": "North Korea",
+    "dialCode": "+850",
+    "shardId": 4
+  },
+  {
+    "code": "MK",
+    "name": "North Macedonia",
+    "dialCode": "+389",
+    "shardId": 2
+  },
+  {
+    "code": "NO",
+    "name": "Norway",
+    "dialCode": "+47",
+    "shardId": 2
+  },
+  {
+    "code": "OM",
+    "name": "Oman",
+    "dialCode": "+968",
+    "shardId": 5
+  },
+  {
+    "code": "PK",
+    "name": "Pakistan",
+    "dialCode": "+92",
+    "shardId": 5
+  },
+  {
+    "code": "PW",
+    "name": "Palau",
+    "dialCode": "+680",
+    "shardId": 5
+  },
+  {
+    "code": "PS",
+    "name": "Palestine",
+    "dialCode": "+970",
+    "shardId": 5
+  },
+  {
+    "code": "PA",
+    "name": "Panama",
+    "dialCode": "+507",
+    "shardId": 3
+  },
+  {
+    "code": "PG",
+    "name": "Papua New Guinea",
+    "dialCode": "+675",
+    "shardId": 5
+  },
+  {
+    "code": "PY",
+    "name": "Paraguay",
+    "dialCode": "+595",
+    "shardId": 3
+  },
+  {
+    "code": "PE",
+    "name": "Peru",
+    "dialCode": "+51",
+    "shardId": 3
+  },
+  {
+    "code": "PH",
+    "name": "Philippines",
+    "dialCode": "+63",
+    "shardId": 5
+  },
+  {
+    "code": "PL",
+    "name": "Poland",
+    "dialCode": "+48",
+    "shardId": 2
+  },
+  {
+    "code": "PT",
+    "name": "Portugal",
+    "dialCode": "+351",
+    "shardId": 2
+  },
+  {
+    "code": "QA",
+    "name": "Qatar",
+    "dialCode": "+974",
+    "shardId": 5
+  },
+  {
+    "code": "RO",
+    "name": "Romania",
+    "dialCode": "+40",
+    "shardId": 2
+  },
+  {
+    "code": "RU",
+    "name": "Russia",
+    "dialCode": "+7",
+    "shardId": 2
+  },
+  {
+    "code": "RW",
+    "name": "Rwanda",
+    "dialCode": "+250",
+    "shardId": 1
+  },
+  {
+    "code": "KN",
+    "name": "Saint Kitts and Nevis",
+    "dialCode": "+1-869",
+    "shardId": 3
+  },
+  {
+    "code": "LC",
+    "name": "Saint Lucia",
+    "dialCode": "+1-758",
+    "shardId": 3
+  },
+  {
+    "code": "VC",
+    "name": "Saint Vincent and the Grenadines",
+    "dialCode": "+1-784",
+    "shardId": 3
+  },
+  {
+    "code": "WS",
+    "name": "Samoa",
+    "dialCode": "+685",
+    "shardId": 5
+  },
+  {
+    "code": "SM",
+    "name": "San Marino",
+    "dialCode": "+378",
+    "shardId": 2
+  },
+  {
+    "code": "ST",
+    "name": "Sao Tome and Principe",
+    "dialCode": "+239",
+    "shardId": 1
+  },
+  {
+    "code": "SA",
+    "name": "Saudi Arabia",
+    "dialCode": "+966",
+    "shardId": 5
+  },
+  {
+    "code": "SN",
+    "name": "Senegal",
+    "dialCode": "+221",
+    "shardId": 1
+  },
+  {
+    "code": "RS",
+    "name": "Serbia",
+    "dialCode": "+381",
+    "shardId": 2
+  },
+  {
+    "code": "SC",
+    "name": "Seychelles",
+    "dialCode": "+248",
+    "shardId": 1
+  },
+  {
+    "code": "SL",
+    "name": "Sierra Leone",
+    "dialCode": "+232",
+    "shardId": 1
+  },
+  {
+    "code": "SG",
+    "name": "Singapore",
+    "dialCode": "+65",
+    "shardId": 5
+  },
+  {
+    "code": "SK",
+    "name": "Slovakia",
+    "dialCode": "+421",
+    "shardId": 2
+  },
+  {
+    "code": "SI",
+    "name": "Slovenia",
+    "dialCode": "+386",
+    "shardId": 2
+  },
+  {
+    "code": "SB",
+    "name": "Solomon Islands",
+    "dialCode": "+677",
+    "shardId": 5
+  },
+  {
+    "code": "SO",
+    "name": "Somalia",
+    "dialCode": "+252",
+    "shardId": 1
+  },
+  {
+    "code": "ZA",
+    "name": "South Africa",
+    "dialCode": "+27",
+    "shardId": 1
+  },
+  {
+    "code": "KR",
+    "name": "South Korea",
+    "dialCode": "+82",
+    "shardId": 4
+  },
+  {
+    "code": "SS",
+    "name": "South Sudan",
+    "dialCode": "+211",
+    "shardId": 1
+  },
+  {
+    "code": "ES",
+    "name": "Spain",
+    "dialCode": "+34",
+    "shardId": 2
+  },
+  {
+    "code": "LK",
+    "name": "Sri Lanka",
+    "dialCode": "+94",
+    "shardId": 5
+  },
+  {
+    "code": "SD",
+    "name": "Sudan",
+    "dialCode": "+249",
+    "shardId": 1
+  },
+  {
+    "code": "SR",
+    "name": "Suriname",
+    "dialCode": "+597",
+    "shardId": 3
+  },
+  {
+    "code": "SE",
+    "name": "Sweden",
+    "dialCode": "+46",
+    "shardId": 2
+  },
+  {
+    "code": "CH",
+    "name": "Switzerland",
+    "dialCode": "+41",
+    "shardId": 2
+  },
+  {
+    "code": "SY",
+    "name": "Syria",
+    "dialCode": "+963",
+    "shardId": 5
+  },
+  {
+    "code": "TW",
+    "name": "Taiwan",
+    "dialCode": "+886",
+    "shardId": 4
+  },
+  {
+    "code": "TJ",
+    "name": "Tajikistan",
+    "dialCode": "+992",
+    "shardId": 5
+  },
+  {
+    "code": "TZ",
+    "name": "Tanzania",
+    "dialCode": "+255",
+    "shardId": 1
+  },
+  {
+    "code": "TH",
+    "name": "Thailand",
+    "dialCode": "+66",
+    "shardId": 5
+  },
+  {
+    "code": "TL",
+    "name": "Timor-Leste",
+    "dialCode": "+670",
+    "shardId": 5
+  },
+  {
+    "code": "TG",
+    "name": "Togo",
+    "dialCode": "+228",
+    "shardId": 1
+  },
+  {
+    "code": "TO",
+    "name": "Tonga",
+    "dialCode": "+676",
+    "shardId": 5
+  },
+  {
+    "code": "TT",
+    "name": "Trinidad and Tobago",
+    "dialCode": "+1-868",
+    "shardId": 3
+  },
+  {
+    "code": "TN",
+    "name": "Tunisia",
+    "dialCode": "+216",
+    "shardId": 1
+  },
+  {
+    "code": "TR",
+    "name": "Turkey",
+    "dialCode": "+90",
+    "shardId": 2
+  },
+  {
+    "code": "TM",
+    "name": "Turkmenistan",
+    "dialCode": "+993",
+    "shardId": 5
+  },
+  {
+    "code": "TV",
+    "name": "Tuvalu",
+    "dialCode": "+688",
+    "shardId": 5
+  },
+  {
+    "code": "UG",
+    "name": "Uganda",
+    "dialCode": "+256",
+    "shardId": 1
+  },
+  {
+    "code": "UA",
+    "name": "Ukraine",
+    "dialCode": "+380",
+    "shardId": 2
+  },
+  {
+    "code": "AE",
+    "name": "United Arab Emirates",
+    "dialCode": "+971",
+    "shardId": 5
+  },
+  {
+    "code": "GB",
+    "name": "United Kingdom",
+    "dialCode": "+44",
+    "shardId": 2
+  },
+  {
+    "code": "USA",
+    "name": "United States",
+    "dialCode": "+1",
+    "shardId": 3
+  },
+  {
+    "code": "UY",
+    "name": "Uruguay",
+    "dialCode": "+598",
+    "shardId": 3
+  },
+  {
+    "code": "UZ",
+    "name": "Uzbekistan",
+    "dialCode": "+998",
+    "shardId": 5
+  },
+  {
+    "code": "VU",
+    "name": "Vanuatu",
+    "dialCode": "+678",
+    "shardId": 5
+  },
+  {
+    "code": "VA",
+    "name": "Vatican City",
+    "dialCode": "+39-06",
+    "shardId": 2
+  },
+  {
+    "code": "VE",
+    "name": "Venezuela",
+    "dialCode": "+58",
+    "shardId": 3
+  },
+  {
+    "code": "VN",
+    "name": "Vietnam",
+    "dialCode": "+84",
+    "shardId": 5
+  },
+  {
+    "code": "YE",
+    "name": "Yemen",
+    "dialCode": "+967",
+    "shardId": 5
+  },
+  {
+    "code": "ZM",
+    "name": "Zambia",
+    "dialCode": "+260",
+    "shardId": 1
+  },
+  {
+    "code": "ZW",
+    "name": "Zimbabwe",
+    "dialCode": "+263",
+    "shardId": 1
+  }
+]
