@@ -1,4 +1,4 @@
-package rmit.saintgiong.discoveryservice.common.kafka;
+package rmit.saintgiong.discoveryservice.common.kafka.local;
 
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;

@@ -10,7 +10,51 @@
     "avatarUrl": "https://example.com/avatars/john-doe.jpg",
     "country": "USA",
     "createdAt": "2024-01-15T10:30:00",
-    "updatedAt": "2024-12-20T14:22:00"
+    "updatedAt": "2024-12-20T14:22:00",
+    "educationList": [
+      {
+        "educationId": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+        "applicantId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+        "institutionName": "University of California, Berkeley",
+        "degree": "BACHELOR",
+        "gpa": 3.8,
+        "description": "Major in Computer Science.",
+        "startDate": "2015-09-01T00:00:00",
+        "endDate": "2019-05-30T00:00:00",
+        "isCurrent": false,
+        "createdAt": "2024-01-15T10:30:00",
+        "updatedAt": "2024-01-15T10:30:00"
+      }
+    ],
+    "workExperienceList": [
+      {
+        "experienceId": "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+        "applicantId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+        "companyName": "Tech Solutions Inc.",
+        "position": "Software Engineer",
+        "description": "Developed and maintained web applications using React and Spring Boot.",
+        "country": "USA",
+        "startDate": "2019-06-01T00:00:00",
+        "endDate": "2022-08-30T00:00:00",
+        "isCurrent": false,
+        "createdAt": "2024-01-15T10:30:00",
+        "updatedAt": "2024-01-15T10:30:00"
+      },
+      {
+        "experienceId": "3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+        "applicantId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+        "companyName": "Innovate LLC",
+        "position": "Senior Software Engineer",
+        "description": "Leading a team of 5 developers. Architecting microservices solutions.",
+        "country": "USA",
+        "startDate": "2022-09-01T00:00:00",
+        "endDate": null,
+        "isCurrent": true,
+        "createdAt": "2024-01-15T10:30:00",
+        "updatedAt": "2024-01-15T10:30:00"
+      }
+    ],
+    "skillIds": [1, 5, 10, 15]
   },
   {
     "applicantId": "b2c3d4e5-f6a7-5b6c-9d0e-1f2a3b4c5d6e",
@@ -23,7 +67,24 @@
     "avatarUrl": "https://example.com/avatars/sarah-johnson.jpg",
     "country": "USA",
     "createdAt": "2024-02-10T09:15:00",
-    "updatedAt": "2024-12-19T11:45:00"
+    "updatedAt": "2024-12-19T11:45:00",
+    "educationList": [
+       {
+        "educationId": "4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f90",
+        "applicantId": "b2c3d4e5-f6a7-5b6c-9d0e-1f2a3b4c5d6e",
+        "institutionName": "Parsons School of Design",
+        "degree": "MASTER",
+        "gpa": 3.9,
+        "description": "MFA in Design and Technology.",
+        "startDate": "2014-09-01T00:00:00",
+        "endDate": "2016-05-30T00:00:00",
+        "isCurrent": false,
+        "createdAt": "2024-02-10T09:15:00",
+        "updatedAt": "2024-02-10T09:15:00"
+      }
+    ],
+    "workExperienceList": [],
+    "skillIds": [2, 8, 12]
   },
   {
     "applicantId": "c3d4e5f6-a7b8-6c7d-0e1f-2a3b4c5d6e7f",
@@ -36,7 +97,24 @@
     "avatarUrl": "https://example.com/avatars/michael-chen.jpg",
     "country": "USA",
     "createdAt": "2024-03-05T13:20:00",
-    "updatedAt": "2024-12-18T16:30:00"
+    "updatedAt": "2024-12-18T16:30:00",
+    "educationList": [
+       {
+        "educationId": "5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9012",
+        "applicantId": "c3d4e5f6-a7b8-6c7d-0e1f-2a3b4c5d6e7f",
+        "institutionName": "MIT",
+        "degree": "DOCTORATE",
+        "gpa": 4.0,
+        "description": "PhD in Artificial Intelligence.",
+        "startDate": "2016-09-01T00:00:00",
+        "endDate": "2021-06-15T00:00:00",
+        "isCurrent": false,
+        "createdAt": "2024-03-05T13:20:00",
+        "updatedAt": "2024-03-05T13:20:00"
+      }
+    ],
+    "workExperienceList": [],
+    "skillIds": [3, 6, 9]
   },
   {
     "applicantId": "d4e5f6a7-b8c9-7d8e-1f2a-3b4c5d6e7f8a",
@@ -49,7 +127,10 @@
     "avatarUrl": "https://example.com/avatars/emily-martinez.jpg",
     "country": "USA",
     "createdAt": "2024-04-12T08:45:00",
-    "updatedAt": "2024-12-21T09:10:00"
+    "updatedAt": "2024-12-21T09:10:00",
+     "educationList": [],
+     "workExperienceList": [],
+     "skillIds": [4, 7, 11]
   },
   {
     "applicantId": "e5f6a7b8-c9d0-8e9f-2a3b-4c5d6e7f8a9b",
@@ -62,7 +143,10 @@
     "avatarUrl": "https://example.com/avatars/david-kim.jpg",
     "country": "USA",
     "createdAt": "2024-05-20T11:00:00",
-    "updatedAt": "2024-12-22T15:20:00"
+    "updatedAt": "2024-12-22T15:20:00",
+    "educationList": [],
+    "workExperienceList": [],
+    "skillIds": [1, 5]
   },
   {
     "applicantId": "f6a7b8c9-d0e1-9f0a-3b4c-5d6e7f8a9b0c",
@@ -75,7 +159,10 @@
     "avatarUrl": "https://example.com/avatars/jessica-taylor.jpg",
     "country": "USA",
     "createdAt": "2024-06-08T14:30:00",
-    "updatedAt": "2024-12-23T10:00:00"
+    "updatedAt": "2024-12-23T10:00:00",
+    "educationList": [],
+    "workExperienceList": [],
+    "skillIds": [13, 14]
   },
   {
     "applicantId": "a7b8c9d0-e1f2-0a1b-4c5d-6e7f8a9b0c1d",
@@ -88,7 +175,10 @@
     "avatarUrl": "https://example.com/avatars/james-anderson.jpg",
     "country": "USA",
     "createdAt": "2024-07-15T12:15:00",
-    "updatedAt": "2024-12-20T13:40:00"
+    "updatedAt": "2024-12-20T13:40:00",
+    "educationList": [],
+    "workExperienceList": [],
+    "skillIds": [10, 15]
   },
   {
     "applicantId": "b8c9d0e1-f2a3-1b2c-5d6e-7f8a9b0c1d2e",
@@ -101,6 +191,9 @@
     "avatarUrl": "https://example.com/avatars/lisa-wong.jpg",
     "country": "USA",
     "createdAt": "2024-08-22T09:30:00",
-    "updatedAt": "2024-12-21T14:55:00"
+    "updatedAt": "2024-12-21T14:55:00",
+    "educationList": [],
+    "workExperienceList": [],
+    "skillIds": [2, 16]
   }
 ]
