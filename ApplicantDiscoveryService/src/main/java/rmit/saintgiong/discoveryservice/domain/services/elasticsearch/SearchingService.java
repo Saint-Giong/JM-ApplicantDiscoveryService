@@ -10,8 +10,14 @@ import org.springframework.stereotype.Service;
 import rmit.saintgiong.discoveryapi.internal.document.ApplicantDocument;
 import rmit.saintgiong.discoveryapi.internal.service.elasticsearch.SearchingInterface;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.SearchHit;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -92,6 +98,36 @@ public class SearchingService implements SearchingInterface {
                 ._toQuery();
 
         return executeQuery(finalQuery);
+    }
+
+    @Override
+    public Page<ApplicantDocument> getAllApplicants(Pageable pageable) {
+        Query query = QueryBuilders.matchAll().build()._toQuery();
+        NativeQuery nativeQuery = NativeQuery.builder()
+                .withQuery(query)
+                .withPageable(pageable)
+                .build();
+
+        SearchHits<ApplicantDocument> hits = elasticsearchOperations.search(
+                nativeQuery,
+                ApplicantDocument.class,
+                IndexCoordinates.of(APPLICANTS_INDEX)
+        );
+
+        List<ApplicantDocument> applicants = hits.stream()
+                .map(SearchHit::getContent)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(applicants, pageable, hits.getTotalHits());
+    }
+
+    @Override
+    public ApplicantDocument getApplicantById(UUID id) {
+        return elasticsearchOperations.get(
+                id.toString(),
+                ApplicantDocument.class,
+                IndexCoordinates.of(APPLICANTS_INDEX)
+        );
     }
 
     // Helper method to execute query and map results

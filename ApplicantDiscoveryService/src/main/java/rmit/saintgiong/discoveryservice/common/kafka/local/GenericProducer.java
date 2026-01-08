@@ -1,4 +1,4 @@
-package rmit.saintgiong.discoveryservice.common.kafka;
+package rmit.saintgiong.discoveryservice.common.kafka.local;
 
 import lombok.AllArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;

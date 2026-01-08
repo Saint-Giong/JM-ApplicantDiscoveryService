@@ -1,0 +1,74 @@
+{
+  "type": "record",
+  "name": "ApplicantProfileRecord",
+  "namespace": "rmit.saintgiong.discoveryapi.external.common.dto.avro",
+  "fields": [
+    {"name": "applicantId", "type": "string"},
+    {"name": "firstName", "type": "string"},
+    {"name": "lastName", "type": "string"},
+    {"name": "phone", "type": "string"},
+    {"name": "address", "type": "string"},
+    {"name": "city", "type": "string"},
+    {"name": "biography", "type": "string"},
+    {"name": "avatarUrl", "type": ["null", "string"], "default": null},
+    {"name": "country", "type": "string"},
+     {
+      "name": "educationList",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "EducationAvro",
+          "fields": [
+            {"name": "educationId", "type": "string"},
+            {"name": "applicantId", "type": "string"},
+            {"name": "institutionName", "type": "string"},
+            {"name": "degree", "type": "string"},
+            {"name": "gpa", "type": "double"},
+            {"name": "description", "type": "string"},
+            {"name": "startDate", "type": ["null", "string"], "default": null},
+            {"name": "endDate", "type": ["null", "string"], "default": null},
+            {"name": "isCurrent", "type": "boolean"},
+            {"name": "createdAt", "type": ["null", "string"], "default": null},
+            {"name": "updatedAt", "type": ["null", "string"], "default": null}
+          ]
+        }
+      },
+      "default": []
+    },
+    {
+      "name": "workExperienceList",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "WorkExperienceAvro",
+          "fields": [
+             {"name": "experienceId", "type": "string"},
+             {"name": "applicantId", "type": "string"},
+             {"name": "companyName", "type": "string"},
+             {"name": "position", "type": "string"},
+             {"name": "description", "type": "string"},
+             {"name": "country", "type": "string"},
+             {"name": "startDate", "type": ["null", "string"], "default": null},
+             {"name": "endDate", "type": ["null", "string"], "default": null},
+             {"name": "isCurrent", "type": "boolean"},
+             {"name": "createdAt", "type": ["null", "string"], "default": null},
+             {"name": "updatedAt", "type": ["null", "string"], "default": null}
+          ]
+        }
+      },
+      "default": []
+    },
+    {
+      "name": "skillIds",
+      "type": {
+        "type": "array",
+        "items": "long"
+      },
+      "default": []
+    },
+    {"name": "createdAt", "type": ["null", "string"], "default": null},
+    {"name": "updatedAt", "type": ["null", "string"], "default": null}
+  ]
+}

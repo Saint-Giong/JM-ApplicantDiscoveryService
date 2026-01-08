@@ -6,6 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Document(indexName = "applicants")
@@ -27,6 +28,12 @@ public record ApplicantDocument(
         @Field(type = FieldType.Keyword) String avatarUrl,
 
         @Field(type = FieldType.Keyword) Country country,
+
+        @Field(type = FieldType.Nested) List<Education> educationList,
+
+        @Field(type = FieldType.Nested) List<WorkExperience> workExperienceList,
+
+        @Field(type = FieldType.Long) List<Long> skillIds,
 
         @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd'T'HH:mm:ss") LocalDateTime createdAt,
 

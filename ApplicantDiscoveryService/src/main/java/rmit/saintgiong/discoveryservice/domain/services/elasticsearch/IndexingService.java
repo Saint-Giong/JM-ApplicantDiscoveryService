@@ -45,4 +45,15 @@ public class IndexingService implements IndexingInterface {
             throw new RuntimeException("Failed to index applicant", e);
         }
     }
+
+    @Override
+    public void deleteApplicant(String applicantId) {
+        try {
+            elasticsearchOperations.delete(applicantId, IndexCoordinates.of(APPLICANTS_INDEX));
+            log.info("Deleted applicant {}", applicantId);
+        } catch (Exception e) {
+            log.error("Failed to delete applicant: {}", e.getMessage(), e);
+            throw new RuntimeException("Failed to delete applicant", e);
+        }
+    }
 }
