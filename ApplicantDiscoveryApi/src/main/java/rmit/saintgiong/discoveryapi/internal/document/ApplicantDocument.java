@@ -27,7 +27,7 @@ public record ApplicantDocument(
 
         @Field(type = FieldType.Keyword) String avatarUrl,
 
-        @Field(type = FieldType.Keyword) Country country,
+        @Field(type = FieldType.Keyword) String country,
 
         @Field(type = FieldType.Nested) List<Education> educationList,
 
