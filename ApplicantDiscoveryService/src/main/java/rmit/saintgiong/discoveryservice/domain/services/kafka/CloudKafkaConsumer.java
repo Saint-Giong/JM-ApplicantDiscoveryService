@@ -45,7 +45,7 @@ public class CloudKafkaConsumer {
                 : KafkaTopic.UPDATE_APPLICANT_TOPIC_REPLIED;
 
             sendReply(replyTopic, applicantId, "SUCCESS", "Applicant processed successfully", record.headers());
-            
+
         } catch (Exception e) {
             log.error("Error processing applicant update/add: {}", e.getMessage());
              String replyTopic = record.topic().equals(KafkaTopic.ADD_APPLICANT_TOPIC_REQUEST)
