@@ -2,6 +2,7 @@ package rmit.saintgiong.discoveryservice.domain.services.elasticsearch; // Adjus
 
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
+import co.elastic.clients.elasticsearch._types.FieldValue;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
@@ -128,6 +129,170 @@ public class SearchingService implements SearchingInterface {
                 ApplicantDocument.class,
                 IndexCoordinates.of(APPLICANTS_INDEX)
         );
+    }
+
+    @Override
+    public Page<ApplicantDocument> searchApplicants(
+            String name,
+            String keyword,
+            String locationValue,
+            boolean isCountry,
+            List<String> educationLevels,
+            List<Long> skillIds,
+            String workExperienceType,
+            Pageable pageable) {
+
+        List<Query> mustQueries = new ArrayList<>();
+
+        // 1. Name Search (First Name OR Last Name)
+        if (name != null && !name.isBlank()) {
+            Query nameQuery = QueryBuilders.multiMatch()
+                    .fields("firstName", "lastName")
+                    .query(name)
+                    .fuzziness("AUTO")
+                    .build()
+                    ._toQuery();
+            mustQueries.add(nameQuery);
+        }
+
+        // 2. Full Text Search (Keywords)
+        // Searches in biography AND nested work experience fields AND nested education fields
+        if (keyword != null && !keyword.isBlank()) {
+            
+            // Should clause for top-level fields
+            Query topLevelMatch = QueryBuilders.multiMatch()
+                    .fields("biography")
+                    .query(keyword)
+                    .fuzziness("AUTO")
+                    .build()
+                    ._toQuery();
+
+            // Should clause for Nested Work Experience (Flattened path)
+            Query nestedWorkExpMatch = QueryBuilders.multiMatch()
+                    .fields("workExperienceList.position", "workExperienceList.description", "workExperienceList.companyName")
+                    .query(keyword)
+                    .fuzziness("AUTO")
+                    .build()
+                    ._toQuery();
+
+             // Should clause for Nested Education (Flattened path)
+            Query nestedEducationMatch = QueryBuilders.multiMatch()
+                    .fields("educationList.institutionName", "educationList.description")
+                    .query(keyword)
+                    .fuzziness("AUTO")
+                    .build()
+                    ._toQuery();
+
+
+            // Combine them with OR logic (Should) inside a MUST: (TopLevel OR NestedExp OR NestedEdu)
+            Query ftsCombination = QueryBuilders.bool()
+                    .should(topLevelMatch)
+                    .should(nestedWorkExpMatch)
+                    .should(nestedEducationMatch)
+                    .minimumShouldMatch("1")
+                    .build()
+                    ._toQuery();
+
+            mustQueries.add(ftsCombination);
+        }
+
+        // 2. Location Filter
+        if (locationValue != null && !locationValue.isBlank()) {
+            if (isCountry) {
+                // Exact match on Country Code (assuming enum/mapped as keyword)
+                 Query countryQuery = QueryBuilders.term()
+                        .field("country")
+                        .value(locationValue)
+                        .caseInsensitive(true)
+                        .build()
+                        ._toQuery();
+                mustQueries.add(countryQuery);
+            } else {
+                // City is a Keyword field, use Term for exact or wildcard for flexibility.
+                // Requirement 5.1.3: "one value for the Location".
+                // Using term with case insensitivity for better UX on Keyword fields
+                Query cityQuery = QueryBuilders.term()
+                        .field("city")
+                        .value(locationValue)
+                        .caseInsensitive(true)
+                        .build()
+                        ._toQuery();
+                mustQueries.add(cityQuery);
+            }
+        }
+
+        // 3. Education Level Filter (Nested -> Flattened for robustness)
+        if (educationLevels != null && !educationLevels.isEmpty()) {
+            // Use Bool Should Match to handle potentially mixed Text/Keyword mappings (case sensitivity)
+             List<String> upperCaseDegrees = educationLevels.stream()
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+
+            List<Query> degreeQueries = upperCaseDegrees.stream()
+                    .map(degree -> QueryBuilders.match()
+                            .field("educationList.degree")
+                            .query(degree)
+                            .build()
+                            ._toQuery())
+                    .collect(Collectors.toList());
+
+            Query educationQuery = QueryBuilders.bool()
+                    .should(degreeQueries)
+                    .minimumShouldMatch("1")
+                    .build()
+                    ._toQuery();
+
+            mustQueries.add(educationQuery);
+        }
+
+        // 4. Skills Filter (IDs)
+        if (skillIds != null && !skillIds.isEmpty()) {
+             // "Any applicant declaring their skills... included" -> Terms query (OR logic)
+            Query skillsQuery = QueryBuilders.terms()
+                    .field("skillIds")
+                    .terms(t -> t.value(skillIds.stream().map(FieldValue::of).collect(Collectors.toList())))
+                    .build()
+                    ._toQuery();
+            mustQueries.add(skillsQuery);
+        }
+
+        // 5. Work Experience Type Filter
+        if (workExperienceType != null) {
+            if ("NONE".equalsIgnoreCase(workExperienceType)) {
+                // Must NOT have workExperienceList
+                // Check if field exists
+                Query exists = QueryBuilders.exists().field("workExperienceList").build()._toQuery();
+                Query mustNotHaveExp = QueryBuilders.bool().mustNot(exists).build()._toQuery();
+                mustQueries.add(mustNotHaveExp);
+            } else if ("ANY".equalsIgnoreCase(workExperienceType)) {
+                 // Must HAVE workExperienceList
+                 Query mustHaveExp = QueryBuilders.exists().field("workExperienceList").build()._toQuery();
+                mustQueries.add(mustHaveExp);
+            }
+        }
+
+        // Assemble Final Query
+        Query finalQuery = QueryBuilders.bool()
+                .must(mustQueries)
+                .build()
+                ._toQuery();
+
+        NativeQuery nativeQuery = NativeQuery.builder()
+                .withQuery(finalQuery)
+                .withPageable(pageable)
+                .build();
+
+        SearchHits<ApplicantDocument> hits = elasticsearchOperations.search(
+                nativeQuery,
+                ApplicantDocument.class,
+                IndexCoordinates.of(APPLICANTS_INDEX)
+        );
+
+        List<ApplicantDocument> applicants = hits.stream()
+                .map(SearchHit::getContent)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(applicants, pageable, hits.getTotalHits());
     }
 
     // Helper method to execute query and map results

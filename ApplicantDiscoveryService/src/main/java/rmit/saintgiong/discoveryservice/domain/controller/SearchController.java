@@ -25,21 +25,6 @@ public class SearchController {
         this.searchingInterface = searchingInterface;
     }
 
-    // Test: GET /search/name?q=John
-    @GetMapping("search/name")
-    public ResponseEntity<List<ApplicantDocument>> searchByName(@RequestParam String q) {
-        return ResponseEntity.ok(searchingInterface.searchByName(q));
-    }
-
-    // Test: GET /search/advanced?q=engineer&city=San Francisco
-    @GetMapping("search/advanced")
-    public ResponseEntity<List<ApplicantDocument>> searchAdvanced(
-            @RequestParam(required = false) String q,
-            @RequestParam(required = false) String city,
-            @RequestParam(required = false) String country) {
-        return ResponseEntity.ok(searchingInterface.searchComprehensive(q, city, country));
-    }
-
     @GetMapping("applicants/all")
     public ResponseEntity<Page<ApplicantDocument>> getAllApplicants(
             @RequestParam(defaultValue = "0") int page,
@@ -52,5 +37,22 @@ public class SearchController {
     @GetMapping("applicants/{applicantId}")
     public ResponseEntity<ApplicantDocument> getApplicantById(@PathVariable UUID applicantId) {
         return ResponseEntity.ok(searchingInterface.getApplicantById(applicantId));
+    }
+
+    @GetMapping("applicants/search")
+    public ResponseEntity<Page<ApplicantDocument>> searchApplicants(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String location,
+            @RequestParam(defaultValue = "false") boolean isCountry,
+            @RequestParam(required = false) List<String> education,
+            @RequestParam(required = false) List<Long> skills,
+            @RequestParam(required = false) String experienceType,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(searchingInterface.searchApplicants(
+                name, keyword, location, isCountry, education, skills, experienceType, pageable));
     }
 }

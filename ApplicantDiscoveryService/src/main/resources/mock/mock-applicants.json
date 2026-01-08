@@ -195,5 +195,79 @@
     "educationList": [],
     "workExperienceList": [],
     "skillIds": [2, 16]
+  },
+  {
+    "applicantId": "c9d0e1f2-3a4b-5c6d-7e8f-9a0b1c2d3e4f",
+    "firstName": "Robert",
+    "lastName": "Brown",
+    "phone": "+1234567898",
+    "address": "741 Pine Road",
+    "city": "Dallas",
+    "biography": "Full stack developer with a passion for cloud computing and serverless architectures. Experienced in building scalable web applications.",
+    "avatarUrl": "https://example.com/avatars/robert-brown.jpg",
+    "country": "USA",
+    "createdAt": "2024-09-10T08:00:00",
+    "updatedAt": "2024-12-24T12:00:00",
+    "educationList": [
+      {
+        "educationId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d",
+        "applicantId": "c9d0e1f2-3a4b-5c6d-7e8f-9a0b1c2d3e4f",
+        "institutionName": "University of Texas at Dallas",
+        "degree": "BACHELOR",
+        "gpa": 3.7,
+        "description": "B.S. in Computer Science",
+        "startDate": "2016-08-01T00:00:00",
+        "endDate": "2020-05-01T00:00:00",
+        "isCurrent": false,
+        "createdAt": "2024-09-10T08:00:00",
+        "updatedAt": "2024-09-10T08:00:00"
+      }
+    ],
+    "workExperienceList": [
+      {
+        "experienceId": "7b8c9d0e-1f2a-3b4c-5d6e-7f8a9b0c1d2e",
+        "applicantId": "c9d0e1f2-3a4b-5c6d-7e8f-9a0b1c2d3e4f",
+        "companyName": "Cloud Systems",
+        "position": "Cloud Engineer",
+        "description": "Designed and implemented serverless architectures using AWS Lambda and API Gateway.",
+        "country": "USA",
+        "startDate": "2020-06-01T00:00:00",
+        "endDate": null,
+        "isCurrent": true,
+        "createdAt": "2024-09-10T08:00:00",
+        "updatedAt": "2024-09-10T08:00:00"
+      }
+    ],
+    "skillIds": [1, 5, 10]
+  },
+  {
+    "applicantId": "d0e1f2a3-4b5c-6d7e-8f9a-0b1c2d3e4f5g",
+    "firstName": "Maria",
+    "lastName": "Garcia",
+    "phone": "+1234567899",
+    "address": "852 Oak Lane",
+    "city": "Miami",
+    "biography": "Marketing specialist with 4 years of experience in digital marketing and SEO. Proven track record of increasing website traffic and engagement.",
+    "avatarUrl": "https://example.com/avatars/maria-garcia.jpg",
+    "country": "USA",
+    "createdAt": "2024-10-05T14:45:00",
+    "updatedAt": "2024-12-25T09:30:00",
+    "educationList": [
+      {
+        "educationId": "8c9d0e1f-2a3b-4c5d-6e7f-8a9b0c1d2e3f",
+        "applicantId": "d0e1f2a3-4b5c-6d7e-8f9a-0b1c2d3e4f5g",
+        "institutionName": "University of Miami",
+        "degree": "BACHELOR",
+        "gpa": 3.6,
+        "description": "B.A. in Marketing",
+        "startDate": "2017-08-01T00:00:00",
+        "endDate": "2021-05-01T00:00:00",
+        "isCurrent": false,
+        "createdAt": "2024-10-05T14:45:00",
+        "updatedAt": "2024-10-05T14:45:00"
+      }
+    ],
+    "workExperienceList": [],
+    "skillIds": [17, 18]
   }
 ]

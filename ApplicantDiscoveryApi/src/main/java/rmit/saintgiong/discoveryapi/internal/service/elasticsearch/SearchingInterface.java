@@ -28,4 +28,17 @@ public interface SearchingInterface {
      * Get applicant by ID
      */
     ApplicantDocument getApplicantById(UUID id);
+    /**
+     * Advanced Search for Applicants
+     */
+    Page<ApplicantDocument> searchApplicants(
+            String name,
+            String keyword,
+            String locationValue,
+            boolean isCountry,
+            List<String> educationLevels,
+            List<Long> skillIds,
+            String workExperienceType,
+            Pageable pageable
+    );
 }
