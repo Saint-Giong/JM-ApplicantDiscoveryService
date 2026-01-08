@@ -184,7 +184,7 @@ public class SearchingService implements SearchingInterface {
                     ._toQuery();
 
 
-            // Combine them with OR logic (Should) inside a MUST: (TopLevel OR NestedExp OR NestedEdu)
+            // Combine
             Query ftsCombination = QueryBuilders.bool()
                     .should(topLevelMatch)
                     .should(nestedWorkExpMatch)
@@ -199,7 +199,7 @@ public class SearchingService implements SearchingInterface {
         // 2. Location Filter
         if (locationValue != null && !locationValue.isBlank()) {
             if (isCountry) {
-                // Exact match on Country Code (assuming enum/mapped as keyword)
+                // Exact match on Country Code
                  Query countryQuery = QueryBuilders.term()
                         .field("country")
                         .value(locationValue)
@@ -209,8 +209,6 @@ public class SearchingService implements SearchingInterface {
                 mustQueries.add(countryQuery);
             } else {
                 // City is a Keyword field, use Term for exact or wildcard for flexibility.
-                // Requirement 5.1.3: "one value for the Location".
-                // Using term with case insensitivity for better UX on Keyword fields
                 Query cityQuery = QueryBuilders.term()
                         .field("city")
                         .value(locationValue)
@@ -221,9 +219,9 @@ public class SearchingService implements SearchingInterface {
             }
         }
 
-        // 3. Education Level Filter (Nested -> Flattened for robustness)
+        // 3. Education Level Filter
         if (educationLevels != null && !educationLevels.isEmpty()) {
-            // Use Bool Should Match to handle potentially mixed Text/Keyword mappings (case sensitivity)
+            //case sensitivity
              List<String> upperCaseDegrees = educationLevels.stream()
                 .map(String::toUpperCase)
                 .collect(Collectors.toList());
@@ -247,7 +245,6 @@ public class SearchingService implements SearchingInterface {
 
         // 4. Skills Filter (IDs)
         if (skillIds != null && !skillIds.isEmpty()) {
-             // "Any applicant declaring their skills... included" -> Terms query (OR logic)
             Query skillsQuery = QueryBuilders.terms()
                     .field("skillIds")
                     .terms(t -> t.value(skillIds.stream().map(FieldValue::of).collect(Collectors.toList())))
@@ -260,7 +257,6 @@ public class SearchingService implements SearchingInterface {
         if (workExperienceType != null) {
             if ("NONE".equalsIgnoreCase(workExperienceType)) {
                 // Must NOT have workExperienceList
-                // Check if field exists
                 Query exists = QueryBuilders.exists().field("workExperienceList").build()._toQuery();
                 Query mustNotHaveExp = QueryBuilders.bool().mustNot(exists).build()._toQuery();
                 mustQueries.add(mustNotHaveExp);
@@ -271,7 +267,7 @@ public class SearchingService implements SearchingInterface {
             }
         }
 
-        // Assemble Final Query
+        //Final Query
         Query finalQuery = QueryBuilders.bool()
                 .must(mustQueries)
                 .build()
