@@ -1,9 +1,10 @@
-package rmit.saintgiong.discoveryservice.common.kafka;
+package rmit.saintgiong.discoveryservice.common.kafka.local;
 
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,7 +57,7 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Object> discoveryKafkaListenerContainerFactory(KafkaTemplate<String, Object> kafkaTemplate) {
+    public ConcurrentKafkaListenerContainerFactory<String, Object> discoveryKafkaListenerContainerFactory(@Qualifier("kafkaTemplate") KafkaTemplate<String, Object> kafkaTemplate) {
         ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(discoveryConsumerFactory());
         factory.setReplyTemplate(kafkaTemplate);
@@ -64,7 +65,7 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentMessageListenerContainer<String, Object> replyContainer(ConsumerFactory<String, Object> consumerFactory) {
+    public ConcurrentMessageListenerContainer<String, Object> replyContainer(@Qualifier("discoveryConsumerFactory") ConsumerFactory<String, Object> consumerFactory) {
         ContainerProperties containerProperties = new ContainerProperties(
                 KafkaTopic.NEW_APPLICANT_TOPIC_REPLIED,
                 KafkaTopic.EDIT_APPLICANT_TOPIC_REPLIED
@@ -76,8 +77,8 @@ public class KafkaConsumerConfig {
 
     @Bean
     public ReplyingKafkaTemplate<String, Object, Object> replyingKafkaTemplate(
-            ProducerFactory<String, Object> pf,
-            ConcurrentMessageListenerContainer<String, Object> replyContainer) {
+            @Qualifier("discoveryProducerFactory") ProducerFactory<String, Object> pf,
+            @Qualifier("replyContainer") ConcurrentMessageListenerContainer<String, Object> replyContainer) {
 
         return new ReplyingKafkaTemplate<>(pf, replyContainer);
     }
