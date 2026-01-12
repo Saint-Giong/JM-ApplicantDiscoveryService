@@ -1,26 +1,17 @@
 package rmit.saintgiong.discoveryservice.common.kafka.cloud;
 
-
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
-import org.springframework.kafka.core.ProducerFactory;
-import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
-import org.springframework.kafka.listener.ContainerProperties;
-import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
-import rmit.saintgiong.shared.type.KafkaTopic;
 
-import java.time.Duration;
 import java.util.Map;
-import java.util.UUID;
 
 @Configuration
 public class CloudKafkaConsumerConfig {
@@ -58,24 +49,22 @@ public class CloudKafkaConsumerConfig {
         return factory;
     }
 
-    // --- REQUEST-REPLY CONFIGURATION ---
-
+//    // --- REQUEST-REPLY CONFIGURATION ---
+//
 //    @Bean
 //    public ConcurrentMessageListenerContainer<String, Object> cloudKafkaReplyContainer(
 //            @Qualifier("cloudConsumerFactory") ConsumerFactory<String, Object> consumerFactory) {
 //
 //        ContainerProperties containerProperties = new ContainerProperties(
-//                KafkaTopic.ADD_APPLICANT_TOPIC_REPLIED,
-//                KafkaTopic.UPDATE_APPLICANT_TOPIC_REPLIED,
-//                KafkaTopic.DELETE_APPLICANT_TOPIC_REPLIED
+//                ""
 //        );
 //
 //        // FIX: Unique Group ID per instance prevents "reply stealing"
 //        String uniqueGroupId = "reply-group-" + UUID.randomUUID();
 //        containerProperties.setGroupId(uniqueGroupId);
 //
-////         Optimization: Replies are ephemeral; we don't need to commit offsets strictly
-////        containerProperties.setAckMode(ContainerProperties.AckMode.RECORD);
+//        // Optimization: Replies are ephemeral; we don't need to commit offsets strictly
+//        // containerProperties.setAckMode(ContainerProperties.AckMode.RECORD);
 //
 //        return new ConcurrentMessageListenerContainer<>(consumerFactory, containerProperties);
 //    }

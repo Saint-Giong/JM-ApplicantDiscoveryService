@@ -53,9 +53,23 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8070/eureka}
 
-#kafka:
-#  kafka-host-url: ${KAFKA_HOST_URL:localhost:9192}
-#  schema-registry-host-url: ${SCHEMA_REGISTRY_HOST_URL:http://localhost:9191}
+kafka:
+  # CONFLUENT CLOUD + REGISTRY SCHEMA
+  cloud:
+    bootstrap-servers: ${CLOUDKAFKA_BROKERS}
+    security:
+      api-key: ${CLOUDKAFKA_API_KEY}
+      api-secret: ${CLOUDKAFKA_API_SECRET}
+    schema-registry:
+      url: ${SCHEMA_REGISTRY_URL}
+      api-key: ${SCHEMA_REGISTRY_KEY}
+      api-secret: ${SCHEMA_REGISTRY_SECRET}
+
+  # LOCAL DOCKER
+  local:
+    bootstrap-servers: ${KAFKA_HOST_URL:localhost:9192}
+    schema-registry:
+      url: ${SCHEMA_REGISTRY_HOST_URL:http://localhost:9191}
 
 key:
   public-key-b64: ${PUBLIC_KEY_B64:}

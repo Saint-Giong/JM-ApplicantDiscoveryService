@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "name": "GetAllPremiumCompaniesRequestRecord",
+  "namespace": "rmit.saintgiong.discoveryapi.external.dto.avro",
+  "fields": [
+    {
+      "name": "requestId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    }
+  ]
+}

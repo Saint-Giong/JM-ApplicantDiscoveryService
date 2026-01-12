@@ -9,5 +9,4 @@ public final class KafkaTopic {
     public static final String JA_APPLICANT_UPDATED_TOPIC= "JA_APPLICANT_UPDATED";
 
     public static final String JA_APPLICANT_DELETED_TOPIC  = "JA_APPLICANT_DELETED";
-
 }
