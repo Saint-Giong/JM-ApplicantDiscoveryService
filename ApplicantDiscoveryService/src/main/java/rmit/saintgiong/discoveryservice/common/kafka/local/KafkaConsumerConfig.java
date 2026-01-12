@@ -64,21 +64,21 @@ public class KafkaConsumerConfig {
         return factory;
     }
 
-    @Bean
-    public ConcurrentMessageListenerContainer<String, Object> replyContainer(@Qualifier("discoveryConsumerFactory") ConsumerFactory<String, Object> consumerFactory) {
-        ContainerProperties containerProperties = new ContainerProperties(
-                ""
-        );
-        containerProperties.setGroupId(serviceName + "-reply-group");
-
-        return new ConcurrentMessageListenerContainer<>(consumerFactory, containerProperties);
-    }
-
-    @Bean
-    public ReplyingKafkaTemplate<String, Object, Object> replyingKafkaTemplate(
-            @Qualifier("discoveryProducerFactory") ProducerFactory<String, Object> pf,
-            @Qualifier("replyContainer") ConcurrentMessageListenerContainer<String, Object> replyContainer) {
-
-        return new ReplyingKafkaTemplate<>(pf, replyContainer);
-    }
+//    @Bean
+//    public ConcurrentMessageListenerContainer<String, Object> replyContainer(@Qualifier("discoveryConsumerFactory") ConsumerFactory<String, Object> consumerFactory) {
+//        ContainerProperties containerProperties = new ContainerProperties(
+//                ""
+//        );
+//        containerProperties.setGroupId(serviceName + "-reply-group");
+//
+//        return new ConcurrentMessageListenerContainer<>(consumerFactory, containerProperties);
+//    }
+//
+//    @Bean
+//    public ReplyingKafkaTemplate<String, Object, Object> replyingKafkaTemplate(
+//            @Qualifier("discoveryProducerFactory") ProducerFactory<String, Object> pf,
+//            @Qualifier("replyContainer") ConcurrentMessageListenerContainer<String, Object> replyContainer) {
+//
+//        return new ReplyingKafkaTemplate<>(pf, replyContainer);
+//    }
 }
