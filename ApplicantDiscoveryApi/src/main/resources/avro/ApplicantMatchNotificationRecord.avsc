@@ -1,0 +1,28 @@
+{
+  "type": "record",
+  "name": "ApplicantMatchNotificationRecord",
+  "namespace": "rmit.saintgiong.discoveryapi.external.dto.avro",
+  "fields": [
+    {
+      "name": "applicantId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "companyId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "searchProfileId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    }
+  ]
+}

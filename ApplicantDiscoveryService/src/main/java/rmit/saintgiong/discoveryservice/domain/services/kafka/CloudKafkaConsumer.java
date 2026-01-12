@@ -21,14 +21,11 @@ import rmit.saintgiong.discoveryapi.internal.service.elasticsearch.IndexingInter
 import rmit.saintgiong.discoveryapi.internal.document.ApplicantDocument;
 import rmit.saintgiong.discoveryapi.internal.document.Education;
 import rmit.saintgiong.discoveryapi.internal.document.WorkExperience;
-import rmit.saintgiong.discoveryapi.internal.common.types.type.DegreeType;
-
 // External Services and Repositories
 import rmit.saintgiong.discoveryapi.external.services.ExternalDiscoveryRequestInterface;
-import rmit.saintgiong.discoveryapi.external.services.kafka.EventProducerInterface;
 import rmit.saintgiong.discoveryservice.domain.services.SearchProfileRepository;
 import rmit.saintgiong.discoveryservice.domain.entity.SearchProfileEntity;
-import rmit.saintgiong.discoveryservice.domain.entity.SearchProfile_SkillTagEntity;
+
 
 // Avro Imports
 import rmit.saintgiong.jobapplicant.userprofile.avro.JaApplicantCreatedEvent;
@@ -44,18 +41,15 @@ public class CloudKafkaConsumer {
     private final IndexingInterface indexingInterface;
     private final ExternalDiscoveryRequestInterface externalDiscoveryRequestService;
     private final SearchProfileRepository searchProfileRepository;
-    private final EventProducerInterface eventProducer;
 
     public CloudKafkaConsumer(
             IndexingInterface indexingInterface,
             ExternalDiscoveryRequestInterface externalDiscoveryRequestService,
-            SearchProfileRepository searchProfileRepository,
-            EventProducerInterface eventProducer
+            SearchProfileRepository searchProfileRepository
     ) {
         this.indexingInterface = indexingInterface;
         this.externalDiscoveryRequestService = externalDiscoveryRequestService;
         this.searchProfileRepository = searchProfileRepository;
-        this.eventProducer = eventProducer;
     }
 
     @KafkaListener(
@@ -196,10 +190,7 @@ public class CloudKafkaConsumer {
                             .setSearchProfileId(profile.getProfileId())
                             .build();
 
-                    String topic = isUpdate ? rmit.saintgiong.shared.type.KafkaTopic.JM_UPDATE_APPLICANT_REQUEST_TOPIC : rmit.saintgiong.shared.type.KafkaTopic.JM_NEW_APPLICANT_REQUEST_TOPIC;
-                    
-                    eventProducer.send(topic, notification);
-                    log.info("Sent match notification to topic: {}", topic);
+                    externalDiscoveryRequestService.sendMatchNotification(notification, isUpdate);
                 }
             }
 

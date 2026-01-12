@@ -67,4 +67,14 @@ public class ExternalDiscoveryRequestService implements ExternalDiscoveryRequest
             return Collections.emptyList();
         }
     }
+
+    public void sendMatchNotification(rmit.saintgiong.discoveryapi.external.dto.avro.ApplicantMatchNotificationRecord notification, boolean isUpdate) {
+        String topic = isUpdate ? KafkaTopic.JM_UPDATE_APPLICANT_REQUEST_TOPIC : KafkaTopic.JM_NEW_APPLICANT_REQUEST_TOPIC;
+        try {
+            eventProducer.send(topic, notification);
+            log.info("Sent match notification to topic: {}", topic);
+        } catch (Exception e) {
+            log.error("Failed to send match notification to topic: {}", topic, e);
+        }
+    }
 }
