@@ -67,8 +67,7 @@ public class KafkaConsumerConfig {
     @Bean
     public ConcurrentMessageListenerContainer<String, Object> replyContainer(@Qualifier("discoveryConsumerFactory") ConsumerFactory<String, Object> consumerFactory) {
         ContainerProperties containerProperties = new ContainerProperties(
-                KafkaTopic.NEW_APPLICANT_TOPIC_REPLIED,
-                KafkaTopic.EDIT_APPLICANT_TOPIC_REPLIED
+                ""
         );
         containerProperties.setGroupId(serviceName + "-reply-group");
 
