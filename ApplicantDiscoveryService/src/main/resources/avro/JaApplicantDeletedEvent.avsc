@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "JaApplicantDeletedEvent",
+  "namespace": "rmit.saintgiong.jobapplicant.userprofile.avro",
+  "doc": "Event published to Kafka Cloud when an applicant is deleted",
+  "fields": [
+    {"name": "userId", "type": "string", "doc": "UUID of the deleted user/applicant"},
+    {"name": "timestamp", "type": "long", "doc": "Event timestamp in milliseconds since epoch"}
+  ]
+}

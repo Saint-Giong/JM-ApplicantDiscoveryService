@@ -7,11 +7,12 @@
     "address": "123 Main Street, Apartment 4B",
     "city": "San Francisco",
     "biography": "Experienced software engineer with 5+ years in full-stack development. Passionate about building scalable systems and mentoring junior developers.",
+    "aboutMe": "Experienced software engineer with 5+ years in full-stack development. Passionate about building scalable systems and mentoring junior developers.",
     "avatarUrl": "https://example.com/avatars/john-doe.jpg",
     "country": "USA",
     "createdAt": "2024-01-15T10:30:00",
     "updatedAt": "2024-12-20T14:22:00",
-    "educationList": [
+    "educations": [
       {
         "educationId": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
         "applicantId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
@@ -26,7 +27,7 @@
         "updatedAt": "2024-01-15T10:30:00"
       }
     ],
-    "workExperienceList": [
+    "workExperiences": [
       {
         "experienceId": "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
         "applicantId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
@@ -54,7 +55,8 @@
         "updatedAt": "2024-01-15T10:30:00"
       }
     ],
-    "skillIds": [1, 5, 10, 15]
+    "skillIds": [1, 5, 10, 15],
+    "skillNames": ["JavaScript", "React", "Java", "Spring Boot"]
   },
   {
     "applicantId": "b2c3d4e5-f6a7-5b6c-9d0e-1f2a3b4c5d6e",
@@ -64,12 +66,13 @@
     "address": "456 Oak Avenue",
     "city": "New York",
     "biography": "Product designer specializing in UX/UI with a focus on accessibility and user-centered design. 7 years of experience in tech startups.",
+    "aboutMe": "Product designer specializing in UX/UI with a focus on accessibility and user-centered design. 7 years of experience in tech startups.",
     "avatarUrl": "https://example.com/avatars/sarah-johnson.jpg",
     "country": "USA",
     "createdAt": "2024-02-10T09:15:00",
     "updatedAt": "2024-12-19T11:45:00",
-    "educationList": [
-       {
+    "educations": [
+      {
         "educationId": "4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f90",
         "applicantId": "b2c3d4e5-f6a7-5b6c-9d0e-1f2a3b4c5d6e",
         "institutionName": "Parsons School of Design",
@@ -83,8 +86,9 @@
         "updatedAt": "2024-02-10T09:15:00"
       }
     ],
-    "workExperienceList": [],
-    "skillIds": [2, 8, 12]
+    "workExperiences": [],
+    "skillIds": [2, 8, 12],
+    "skillNames": ["UX/UI Design", "Figma", "Prototyping"]
   },
   {
     "applicantId": "c3d4e5f6-a7b8-6c7d-0e1f-2a3b4c5d6e7f",
@@ -94,12 +98,13 @@
     "address": "789 Pine Street, Suite 200",
     "city": "Seattle",
     "biography": "Data scientist with expertise in machine learning and big data analytics. Published researcher with multiple papers in AI conferences.",
+    "aboutMe": "Data scientist with expertise in machine learning and big data analytics. Published researcher with multiple papers in AI conferences.",
     "avatarUrl": "https://example.com/avatars/michael-chen.jpg",
     "country": "USA",
     "createdAt": "2024-03-05T13:20:00",
     "updatedAt": "2024-12-18T16:30:00",
-    "educationList": [
-       {
+    "educations": [
+      {
         "educationId": "5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9012",
         "applicantId": "c3d4e5f6-a7b8-6c7d-0e1f-2a3b4c5d6e7f",
         "institutionName": "MIT",
@@ -113,8 +118,9 @@
         "updatedAt": "2024-03-05T13:20:00"
       }
     ],
-    "workExperienceList": [],
-    "skillIds": [3, 6, 9]
+    "workExperiences": [],
+    "skillIds": [3, 6, 9],
+    "skillNames": ["Python", "Machine Learning", "Data Analysis"]
   },
   {
     "applicantId": "d4e5f6a7-b8c9-7d8e-1f2a-3b4c5d6e7f8a",
@@ -124,13 +130,15 @@
     "address": "321 Elm Boulevard",
     "city": "Austin",
     "biography": "DevOps engineer passionate about cloud infrastructure and automation. AWS and Kubernetes certified professional.",
+    "aboutMe": "DevOps engineer passionate about cloud infrastructure and automation. AWS and Kubernetes certified professional.",
     "avatarUrl": "https://example.com/avatars/emily-martinez.jpg",
     "country": "USA",
     "createdAt": "2024-04-12T08:45:00",
     "updatedAt": "2024-12-21T09:10:00",
-     "educationList": [],
-     "workExperienceList": [],
-     "skillIds": [4, 7, 11]
+    "educations": [],
+    "workExperiences": [],
+    "skillIds": [4, 7, 11],
+    "skillNames": ["DevOps", "AWS", "Kubernetes"]
   },
   {
     "applicantId": "e5f6a7b8-c9d0-8e9f-2a3b-4c5d6e7f8a9b",
@@ -140,13 +148,15 @@
     "address": "654 Maple Drive",
     "city": "Boston",
     "biography": "Front-end developer specializing in React and modern JavaScript frameworks. Strong focus on performance optimization and clean code.",
+    "aboutMe": "Front-end developer specializing in React and modern JavaScript frameworks. Strong focus on performance optimization and clean code.",
     "avatarUrl": "https://example.com/avatars/david-kim.jpg",
     "country": "USA",
     "createdAt": "2024-05-20T11:00:00",
     "updatedAt": "2024-12-22T15:20:00",
-    "educationList": [],
-    "workExperienceList": [],
-    "skillIds": [1, 5]
+    "educations": [],
+    "workExperiences": [],
+    "skillIds": [1, 5],
+    "skillNames": ["JavaScript", "React"]
   },
   {
     "applicantId": "f6a7b8c9-d0e1-9f0a-3b4c-5d6e7f8a9b0c",
@@ -156,13 +166,15 @@
     "address": "987 Cedar Lane",
     "city": "Denver",
     "biography": "Cybersecurity specialist with expertise in penetration testing and security audits. CISSP certified with 6 years of experience.",
+    "aboutMe": "Cybersecurity specialist with expertise in penetration testing and security audits. CISSP certified with 6 years of experience.",
     "avatarUrl": "https://example.com/avatars/jessica-taylor.jpg",
     "country": "USA",
     "createdAt": "2024-06-08T14:30:00",
     "updatedAt": "2024-12-23T10:00:00",
-    "educationList": [],
-    "workExperienceList": [],
-    "skillIds": [13, 14]
+    "educations": [],
+    "workExperiences": [],
+    "skillIds": [13, 14],
+    "skillNames": ["Cybersecurity", "Penetration Testing"]
   },
   {
     "applicantId": "a7b8c9d0-e1f2-0a1b-4c5d-6e7f8a9b0c1d",
@@ -172,13 +184,15 @@
     "address": "147 Birch Street",
     "city": "Portland",
     "biography": "Backend engineer with strong expertise in microservices architecture and distributed systems. Java and Spring Boot specialist.",
+    "aboutMe": "Backend engineer with strong expertise in microservices architecture and distributed systems. Java and Spring Boot specialist.",
     "avatarUrl": "https://example.com/avatars/james-anderson.jpg",
     "country": "USA",
     "createdAt": "2024-07-15T12:15:00",
     "updatedAt": "2024-12-20T13:40:00",
-    "educationList": [],
-    "workExperienceList": [],
-    "skillIds": [10, 15]
+    "educations": [],
+    "workExperiences": [],
+    "skillIds": [10, 15],
+    "skillNames": ["Java", "Spring Boot"]
   },
   {
     "applicantId": "b8c9d0e1-f2a3-1b2c-5d6e-7f8a9b0c1d2e",
@@ -188,13 +202,15 @@
     "address": "258 Spruce Avenue",
     "city": "Chicago",
     "biography": "Mobile app developer with focus on iOS development using Swift. Published 10+ apps on the App Store with millions of downloads.",
+    "aboutMe": "Mobile app developer with focus on iOS development using Swift. Published 10+ apps on the App Store with millions of downloads.",
     "avatarUrl": "https://example.com/avatars/lisa-wong.jpg",
     "country": "USA",
     "createdAt": "2024-08-22T09:30:00",
     "updatedAt": "2024-12-21T14:55:00",
-    "educationList": [],
-    "workExperienceList": [],
-    "skillIds": [2, 16]
+    "educations": [],
+    "workExperiences": [],
+    "skillIds": [2, 16],
+    "skillNames": ["UX/UI Design", "Swift"]
   },
   {
     "applicantId": "c9d0e1f2-3a4b-5c6d-7e8f-9a0b1c2d3e4f",
@@ -204,11 +220,12 @@
     "address": "741 Pine Road",
     "city": "Dallas",
     "biography": "Full stack developer with a passion for cloud computing and serverless architectures. Experienced in building scalable web applications.",
+    "aboutMe": "Full stack developer with a passion for cloud computing and serverless architectures. Experienced in building scalable web applications.",
     "avatarUrl": "https://example.com/avatars/robert-brown.jpg",
     "country": "USA",
     "createdAt": "2024-09-10T08:00:00",
     "updatedAt": "2024-12-24T12:00:00",
-    "educationList": [
+    "educations": [
       {
         "educationId": "6a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d",
         "applicantId": "c9d0e1f2-3a4b-5c6d-7e8f-9a0b1c2d3e4f",
@@ -223,7 +240,7 @@
         "updatedAt": "2024-09-10T08:00:00"
       }
     ],
-    "workExperienceList": [
+    "workExperiences": [
       {
         "experienceId": "7b8c9d0e-1f2a-3b4c-5d6e-7f8a9b0c1d2e",
         "applicantId": "c9d0e1f2-3a4b-5c6d-7e8f-9a0b1c2d3e4f",
@@ -238,7 +255,8 @@
         "updatedAt": "2024-09-10T08:00:00"
       }
     ],
-    "skillIds": [1, 5, 10]
+    "skillIds": [1, 5, 10],
+    "skillNames": ["JavaScript", "React", "Java"]
   },
   {
     "applicantId": "d0e1f2a3-4b5c-6d7e-8f9a-0b1c2d3e4f5f",
@@ -248,11 +266,12 @@
     "address": "852 Oak Lane",
     "city": "Miami",
     "biography": "Marketing specialist with 4 years of experience in digital marketing and SEO. Proven track record of increasing website traffic and engagement.",
+    "aboutMe": "Marketing specialist with 4 years of experience in digital marketing and SEO. Proven track record of increasing website traffic and engagement.",
     "avatarUrl": "https://example.com/avatars/maria-garcia.jpg",
     "country": "USA",
     "createdAt": "2024-10-05T14:45:00",
     "updatedAt": "2024-12-25T09:30:00",
-    "educationList": [
+    "educations": [
       {
         "educationId": "8c9d0e1f-2a3b-4c5d-6e7f-8a9b0c1d2e3f",
         "applicantId": "d0e1f2a3-4b5c-6d7e-8f9a-0b1c2d3e4f5f",
@@ -267,7 +286,8 @@
         "updatedAt": "2024-10-05T14:45:00"
       }
     ],
-    "workExperienceList": [],
-    "skillIds": [17, 18]
+    "workExperiences": [],
+    "skillIds": [17, 18],
+    "skillNames": ["SEO", "Digital Marketing"]
   }
 ]

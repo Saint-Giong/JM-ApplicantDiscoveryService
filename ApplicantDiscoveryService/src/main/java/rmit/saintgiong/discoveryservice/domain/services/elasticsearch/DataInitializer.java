@@ -32,7 +32,7 @@ public class DataInitializer {
         logger.info("Starting mock data loading...");
 
         try {
-            loadCountries();
+//            loadCountries();
             loadApplicants();
 
 
@@ -42,18 +42,18 @@ public class DataInitializer {
         }
     }
 
-    private void loadCountries() throws IOException {
-        logger.info("Loading countries from JSON...");
-
-        InputStream inputStream = new ClassPathResource("mock/countries.json").getInputStream();
-        List<Country> countries = objectMapper.readValue(
-                inputStream,
-                new TypeReference<List<Country>>() {
-                });
-
-        Country.initialize(countries);
-        logger.info("Loaded {} countries", countries.size());
-    }
+//    private void loadCountries() throws IOException {
+//        logger.info("Loading countries from JSON...");
+//
+//        InputStream inputStream = new ClassPathResource("mock/countries.json").getInputStream();
+//        List<Country> countries = objectMapper.readValue(
+//                inputStream,
+//                new TypeReference<List<Country>>() {
+//                });
+//
+//        Country.initialize(countries);
+//        logger.info("Loaded {} countries", countries.size());
+//    }
 
 
     private void loadApplicants() throws IOException {

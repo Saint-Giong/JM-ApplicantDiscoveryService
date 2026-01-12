@@ -53,9 +53,9 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8070/eureka}
 
-kafka:
-  kafka-host-url: ${KAFKA_HOST_URL:localhost:9192}
-  schema-registry-host-url: ${SCHEMA_REGISTRY_HOST_URL:http://localhost:9191}
+#kafka:
+#  kafka-host-url: ${KAFKA_HOST_URL:localhost:9192}
+#  schema-registry-host-url: ${SCHEMA_REGISTRY_HOST_URL:http://localhost:9191}
 
 key:
   public-key-b64: ${PUBLIC_KEY_B64:}
