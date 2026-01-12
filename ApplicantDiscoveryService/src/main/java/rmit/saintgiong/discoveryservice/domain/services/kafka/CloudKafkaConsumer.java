@@ -151,29 +151,7 @@ public class CloudKafkaConsumer {
             List<SearchProfileEntity> searchProfiles = searchProfileRepository.findByCompanyIdIn(premiumCompanyIds);
             
             // MOCK DATA FOR TESTING
-            if (premiumCompanyIds.contains(UUID.fromString("22222222-2222-2222-2222-222222222222"))) {
-                log.info("Injecting mock search profiles for test company 22222222-2222-2222-2222-222222222222");
-                
-                // Mock 1: Matches Alice (Australia)
-                SearchProfileEntity mock1 = new SearchProfileEntity();
-                mock1.setProfileId(UUID.randomUUID());
-                mock1.setCompanyId(UUID.fromString("22222222-2222-2222-2222-222222222222"));
-                mock1.setCountry("Australia");
-                
-                // Mock 2: Matches Huân (Vietnam, Skills 2, 6)
-                SearchProfileEntity mock2 = new SearchProfileEntity();
-                mock2.setProfileId(UUID.randomUUID());
-                mock2.setCompanyId(UUID.fromString("22222222-2222-2222-2222-222222222222"));
-                mock2.setCountry("Vietnam");
-                mock2.addSkillTag(2);
-                mock2.addSkillTag(6); // Applicant has 2, 4, 6. Required 2, 6 is a subset of applicant's skills -> Match.
 
-                if (searchProfiles == null) {
-                    searchProfiles = new java.util.ArrayList<>();
-                }
-                searchProfiles.add(mock1);
-                searchProfiles.add(mock2);
-            }
             
             log.info("Found {} search profiles from premium companies to check against applicant {}", searchProfiles.size(), applicant.applicantId());
 
@@ -235,7 +213,8 @@ public class CloudKafkaConsumer {
                     .map(tagEntity -> tagEntity.getSkillTagId().getTagId())
                     .collect(Collectors.toSet());
 
-            if (!applicantSkillIds.containsAll(requiredSkillIds)) {
+            // Match if have any required skill
+            if (Collections.disjoint(applicantSkillIds, requiredSkillIds)) {
                 return false;
             }
         }

@@ -47,11 +47,8 @@ public class ExternalDiscoveryRequestService implements ExternalDiscoveryRequest
                     GetAllPremiumCompaniesResponseRecord.class
             );
 
-            if (response == null || response.getPremiumCompanyIds().isEmpty()) {
-                List<Object > list = new ArrayList<>();
-                list.add("22222222-2222-2222-2222-222222222222");
-                return list;
-//                return Collections.emptyList();
+            if (response == null || response.getPremiumCompanyIds() == null || response.getPremiumCompanyIds().isEmpty()) {
+                return Collections.emptyList();
             }
 
             // 3. Map the Avro List to DTO List
