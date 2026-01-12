@@ -37,7 +37,7 @@ public class CloudKafkaConsumer {
     }
 
     @KafkaListener(
-            topics = KafkaTopic.ADD_APPLICANT_TOPIC_REQUEST,
+            topics = KafkaTopic.JA_APPLICANT_CREATED_TOPIC,
             containerFactory = "cloudKafkaListenerContainerFactory"
     )
     public void consumeApplicantAdd(ConsumerRecord<String, JaApplicantCreatedEvent> record) {
@@ -58,7 +58,7 @@ public class CloudKafkaConsumer {
     }
 
     @KafkaListener(
-            topics = KafkaTopic.UPDATE_APPLICANT_TOPIC_REQUEST,
+            topics = KafkaTopic.JA_APPLICANT_UPDATED_TOPIC,
             containerFactory = "cloudKafkaListenerContainerFactory"
     )
     public void consumeApplicantUpdate(ConsumerRecord<String, JaApplicantUpdatedEvent> record) {
@@ -79,7 +79,7 @@ public class CloudKafkaConsumer {
     }
 
     @KafkaListener(
-            topics = KafkaTopic.DELETE_APPLICANT_TOPIC_REQUEST,
+            topics = KafkaTopic.JA_APPLICANT_DELETED_TOPIC,
             containerFactory = "cloudKafkaListenerContainerFactory"
     )
     public void consumeApplicantDelete(ConsumerRecord<String, JaApplicantUpdatedEvent> record) {

@@ -16,7 +16,7 @@ import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
-import rmit.saintgiong.discoveryapi.internal.common.types.type.KafkaTopic;
+import rmit.saintgiong.shared.type.KafkaTopic;
 
 import java.time.Duration;
 import java.util.Map;
