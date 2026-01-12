@@ -1,6 +1,5 @@
 package rmit.saintgiong.discoveryservice.domain.services.elasticsearch;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
@@ -18,20 +17,14 @@ public class IndexingService implements IndexingInterface {
     private static final String APPLICANTS_INDEX = "applicants";
 
     private final ElasticsearchOperations elasticsearchOperations;
-    private final ObjectMapper objectMapper;
 
-    public IndexingService(
-            ElasticsearchOperations elasticsearchOperations,
-            ObjectMapper objectMapper) {
+    public IndexingService(ElasticsearchOperations elasticsearchOperations) {
         this.elasticsearchOperations = elasticsearchOperations;
-        this.objectMapper = objectMapper;
     }
 
     @Override
-    public void indexApplicant(Object applicantData) {
+    public void indexApplicant(ApplicantDocument document) {
         try {
-            ApplicantDocument document = objectMapper.convertValue(applicantData, ApplicantDocument.class);
-
             IndexQuery indexQuery = new IndexQueryBuilder()
                     .withId(document.applicantId().toString())
                     .withObject(document)

@@ -1,0 +1,67 @@
+{
+  "type": "record",
+  "name": "JaApplicantUpdatedEvent",
+  "namespace": "rmit.saintgiong.jobapplicant.userprofile.avro",
+  "fields": [
+    {"name": "userId", "type": "string"},
+    {"name": "firstName", "type": ["null", "string"], "default": null},
+    {"name": "lastName", "type": ["null", "string"], "default": null},
+    {"name": "phone", "type": ["null", "string"], "default": null},
+    {"name": "address", "type": ["null", "string"], "default": null},
+    {"name": "city", "type": ["null", "string"], "default": null},
+    {"name": "country", "type": "string"},
+    {"name": "biography", "type": ["null", "string"], "default": null},
+    {"name": "aboutMe", "type": ["null", "string"], "default": null},
+    {"name": "avatarUrl", "type": ["null", "string"], "default": null},
+    {
+      "name": "skillIds",
+      "type": {"type": "array", "items": "long"},
+      "default": []
+    },
+    {
+      "name": "skillNames",
+      "type": {"type": "array", "items": "string"},
+      "default": []
+    },
+    {
+      "name": "educations",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "EducationEvent",
+          "fields": [
+            {"name": "institutionName", "type": ["null", "string"], "default": null},
+            {"name": "degree", "type": ["null", "string"], "default": null},
+            {"name": "gpa", "type": ["null", "double"], "default": null},
+            {"name": "description", "type": ["null", "string"], "default": null},
+            {"name": "startDate", "type": ["null", "string"], "default": null},
+            {"name": "endDate", "type": ["null", "string"], "default": null},
+            {"name": "isCurrent", "type": "boolean", "default": false}
+          ]
+        }
+      },
+      "default": []
+    },
+    {
+      "name": "workExperiences",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "WorkExperienceEvent",
+          "fields": [
+            {"name": "companyName", "type": ["null", "string"], "default": null},
+            {"name": "position", "type": ["null", "string"], "default": null},
+            {"name": "description", "type": ["null", "string"], "default": null},
+            {"name": "country", "type": ["null", "string"], "default": null},
+            {"name": "startDate", "type": ["null", "string"], "default": null},
+            {"name": "endDate", "type": ["null", "string"], "default": null},
+            {"name": "isCurrent", "type": "boolean", "default": false}
+          ]
+        }
+      },
+      "default": []
+    }
+  ]
+}

@@ -28,6 +28,7 @@ public interface SearchingInterface {
      * Get applicant by ID
      */
     ApplicantDocument getApplicantById(UUID id);
+
     /**
      * Advanced Search for Applicants
      */

@@ -25,18 +25,22 @@ public record ApplicantDocument(
 
         @Field(type = FieldType.Text) String biography,
 
+        @Field(type = FieldType.Text) String aboutMe,
+
         @Field(type = FieldType.Keyword) String avatarUrl,
 
         @Field(type = FieldType.Keyword) String country,
 
-        @Field(type = FieldType.Nested) List<Education> educationList,
+        @Field(type = FieldType.Nested) List<Education> educations,
 
-        @Field(type = FieldType.Nested) List<WorkExperience> workExperienceList,
+        @Field(type = FieldType.Nested) List<WorkExperience> workExperiences,
 
         @Field(type = FieldType.Long) List<Long> skillIds,
 
+        @Field(type = FieldType.Text) List<String> skillNames,
+
         @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd'T'HH:mm:ss") LocalDateTime createdAt,
 
-        @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd'T'HH:mm:ss") LocalDateTime updatedAt){
+        @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd'T'HH:mm:ss") LocalDateTime updatedAt
+) {
 }
-
