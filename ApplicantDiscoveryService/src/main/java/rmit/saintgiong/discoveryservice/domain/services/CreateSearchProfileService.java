@@ -38,7 +38,7 @@ public class CreateSearchProfileService implements InternalCreateSearchProfileIn
             throw new IllegalArgumentException("Request cannot be null");
         }
 
-        Boolean companyPremiumStatus = externalDiscoveryRequestInterface.sendGetPremiumCompanyStatus(request.getCompanyId());
+        Boolean companyPremiumStatus = externalDiscoveryRequestInterface.sendGetCompanyPremiumStatusRequest(request.getCompanyId());
 
         if(companyPremiumStatus == null || !companyPremiumStatus) {
             throw new IllegalArgumentException("Company is not premium or does not exist: " + request.getCompanyId());

@@ -8,6 +8,6 @@ import java.util.UUID;
 
 public interface ExternalDiscoveryRequestInterface {
     List<Object> sendGetAllPremiumCompaniesRequest();
-    Boolean sendGetPremiumCompanyStatus(UUID companyId);
+    Boolean sendGetCompanyPremiumStatusRequest(UUID companyId);
     void sendMatchNotification(ApplicantMatchNotificationRecord notification, boolean isUpdate);
 }

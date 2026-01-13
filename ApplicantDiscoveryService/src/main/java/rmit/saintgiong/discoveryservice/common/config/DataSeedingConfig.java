@@ -12,7 +12,7 @@ import rmit.saintgiong.discoveryapi.internal.common.types.type.EmploymentTypeEnu
 import rmit.saintgiong.discoveryservice.domain.entity.SearchProfileEntity;
 import rmit.saintgiong.discoveryservice.domain.services.SearchProfileRepository;
 
-
+// 
 @Component
 @Slf4j
 @RequiredArgsConstructor
