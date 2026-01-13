@@ -3,10 +3,12 @@ package rmit.saintgiong.discoveryservice.domain.services.external;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import rmit.saintgiong.discoveryapi.external.services.ExternalDiscoveryRequestInterface;
-import rmit.saintgiong.discoveryapi.external.services.kafka.CloudEventProducerInterface;
 import rmit.saintgiong.discoveryapi.external.services.kafka.EventProducerInterface;
+
 import rmit.saintgiong.shared.dto.avro.discovery.GetAllPremiumCompaniesRequestRecord;
 import rmit.saintgiong.shared.dto.avro.discovery.GetAllPremiumCompaniesResponseRecord;
+import rmit.saintgiong.shared.dto.avro.discovery.GetPremiumCompanyStatusRequestRecord;
+import rmit.saintgiong.shared.dto.avro.discovery.GetPremiumCompanyStatusResponseRecord;
 import rmit.saintgiong.shared.dto.avro.notification.ApplicantMatchNotificationRecord;
 import rmit.saintgiong.shared.type.KafkaTopic;
 
@@ -59,6 +61,38 @@ public class ExternalDiscoveryRequestService implements ExternalDiscoveryRequest
         } catch (Exception e) {
             log.error("Unexpected error in sendGetAllProfilesRequest", e);
             return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public Boolean sendGetPremiumCompanyStatus(UUID companyId) {
+        try {
+            GetPremiumCompanyStatusRequestRecord request = GetPremiumCompanyStatusRequestRecord.newBuilder()
+                    .setCompanyId(companyId)
+                    .build();
+
+            // 2. Send and wait for reply
+            GetPremiumCompanyStatusResponseRecord response = eventProducer.sendAndReceive(
+                    KafkaTopic.JM_PREMIUM_COMPANY_REQUEST_TOPIC,
+                    KafkaTopic.JM_PREMIUM_COMPANY_RESPONSE_TOPIC,
+                    request,
+                    GetPremiumCompanyStatusResponseRecord.class
+            );
+
+            if (response == null) {
+                return false;
+            }
+
+            // 3. Map the Avro List to DTO List
+            return response.getPremiumStatus();
+
+        } catch (ExecutionException | InterruptedException e) {
+            log.error("Failed to fetch status", e);
+            return false;
+        } catch (Exception e) {
+            log.error("Unexpected error in sendGetPremiumCompanyStatus", e);
+            return false;
+// Unused imports left alone to minimize risk of removing something user wants, but I will fix unreachable code.
         }
     }
 

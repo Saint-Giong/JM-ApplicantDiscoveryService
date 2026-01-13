@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import rmit.saintgiong.discoveryapi.external.services.ExternalDiscoveryRequestInterface;
 import rmit.saintgiong.discoveryapi.internal.service.InternalCreateSearchProfileInterface;
 import rmit.saintgiong.discoveryapi.internal.common.dto.CreateSearchProfileRequestDto;
 import rmit.saintgiong.discoveryapi.internal.common.dto.SearchProfileResponseDto;
@@ -17,6 +18,7 @@ public class CreateSearchProfileService implements InternalCreateSearchProfileIn
 
     private final SearchProfileRepository searchProfileRepository;
     private final SearchProfileMapper searchProfileMapper;
+    private final ExternalDiscoveryRequestInterface externalDiscoveryRequestInterface;
 
     /**
      * Creates a new search profile for applicant discovery.
@@ -36,7 +38,15 @@ public class CreateSearchProfileService implements InternalCreateSearchProfileIn
             throw new IllegalArgumentException("Request cannot be null");
         }
 
+        Boolean companyPremiumStatus = externalDiscoveryRequestInterface.sendGetPremiumCompanyStatus(request.getCompanyId());
+
+        if(companyPremiumStatus == null || !companyPremiumStatus) {
+            throw new IllegalArgumentException("Company is not premium or does not exist: " + request.getCompanyId());
+        }
+
         log.info("Creating search profile for company: {}", request.getCompanyId());
+
+
 
         // Convert the request DTO to entity, mapping basic fields
         SearchProfileEntity entity = searchProfileMapper.requestDtoToEntity(request);
