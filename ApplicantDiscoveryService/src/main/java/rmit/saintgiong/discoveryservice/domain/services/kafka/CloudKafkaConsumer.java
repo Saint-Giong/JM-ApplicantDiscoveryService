@@ -32,7 +32,7 @@ import rmit.saintgiong.jobapplicant.userprofile.avro.JaApplicantCreatedEvent;
 import rmit.saintgiong.jobapplicant.userprofile.avro.JaApplicantUpdatedEvent;
 import rmit.saintgiong.jobapplicant.userprofile.avro.EducationEvent;
 import rmit.saintgiong.jobapplicant.userprofile.avro.WorkExperienceEvent;
-import rmit.saintgiong.discoveryapi.external.dto.avro.ApplicantMatchNotificationRecord; // Generated Avro
+import rmit.saintgiong.shared.dto.avro.notification.ApplicantMatchNotificationRecord;
 
 @Service
 public class CloudKafkaConsumer {
@@ -214,9 +214,7 @@ public class CloudKafkaConsumer {
                     .collect(Collectors.toSet());
 
             // Match if have any required skill
-            if (Collections.disjoint(applicantSkillIds, requiredSkillIds)) {
-                return false;
-            }
+            return !Collections.disjoint(applicantSkillIds, requiredSkillIds);
         }
 
         return true;
@@ -238,7 +236,7 @@ public class CloudKafkaConsumer {
                 : Collections.emptyList();
 
         return new ApplicantDocument(
-                UUID.fromString(event.getUserId().toString()),
+                UUID.fromString(event.getUserId()),
                 toStringSafe(event.getFirstName()),
                 toStringSafe(event.getLastName()),
                 toStringSafe(event.getPhone()),
@@ -299,7 +297,7 @@ public class CloudKafkaConsumer {
         // The CreatedEvent schema only has basic info, so we initialize lists as empty
         // and missing strings as null.
         return new ApplicantDocument(
-                UUID.fromString(event.getUserId().toString()),
+                UUID.fromString(event.getUserId()),
                 toStringSafe(event.getFirstName()),
                 toStringSafe(event.getLastName()),
                 toStringSafe(event.getPhone()),

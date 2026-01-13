@@ -1,9 +1,9 @@
 package rmit.saintgiong.discoveryapi.external.services;
 
-import java.util.List;
-import java.util.UUID;
+import rmit.saintgiong.shared.dto.avro.notification.ApplicantMatchNotificationRecord;
 
-import rmit.saintgiong.discoveryapi.external.dto.avro.ApplicantMatchNotificationRecord;
+import java.util.List;
+
 
 public interface ExternalDiscoveryRequestInterface {
     List<Object> sendGetAllPremiumCompaniesRequest();

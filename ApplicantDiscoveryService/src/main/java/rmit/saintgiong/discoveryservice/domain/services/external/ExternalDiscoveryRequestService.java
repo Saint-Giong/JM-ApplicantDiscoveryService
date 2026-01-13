@@ -5,14 +5,11 @@ import org.springframework.stereotype.Service;
 import rmit.saintgiong.discoveryapi.external.services.ExternalDiscoveryRequestInterface;
 import rmit.saintgiong.discoveryapi.external.services.kafka.CloudEventProducerInterface;
 import rmit.saintgiong.discoveryapi.external.services.kafka.EventProducerInterface;
+import rmit.saintgiong.shared.dto.avro.discovery.GetAllPremiumCompaniesRequestRecord;
+import rmit.saintgiong.shared.dto.avro.discovery.GetAllPremiumCompaniesResponseRecord;
+import rmit.saintgiong.shared.dto.avro.notification.ApplicantMatchNotificationRecord;
 import rmit.saintgiong.shared.type.KafkaTopic;
-// import rmit.saintgiong.jobpostapi.external.dto.avro.*; // Avro classes need to be generated or imported
-// import rmit.saintgiong.shared.type.KafkaTopic; 
 
-import rmit.saintgiong.discoveryapi.external.dto.avro.GetAllPremiumCompaniesRequestRecord;
-import rmit.saintgiong.discoveryapi.external.dto.avro.GetAllPremiumCompaniesResponseRecord;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -65,7 +62,7 @@ public class ExternalDiscoveryRequestService implements ExternalDiscoveryRequest
         }
     }
 
-    public void sendMatchNotification(rmit.saintgiong.discoveryapi.external.dto.avro.ApplicantMatchNotificationRecord notification, boolean isUpdate) {
+    public void sendMatchNotification(ApplicantMatchNotificationRecord notification, boolean isUpdate) {
         String topic = isUpdate ? KafkaTopic.JM_UPDATE_APPLICANT_REQUEST_TOPIC : KafkaTopic.JM_NEW_APPLICANT_REQUEST_TOPIC;
         try {
             eventProducer.send(topic, notification);
