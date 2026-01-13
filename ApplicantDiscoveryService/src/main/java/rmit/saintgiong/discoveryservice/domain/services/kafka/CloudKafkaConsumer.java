@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.Set;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,21 +21,35 @@ import rmit.saintgiong.discoveryapi.internal.service.elasticsearch.IndexingInter
 import rmit.saintgiong.discoveryapi.internal.document.ApplicantDocument;
 import rmit.saintgiong.discoveryapi.internal.document.Education;
 import rmit.saintgiong.discoveryapi.internal.document.WorkExperience;
+// External Services and Repositories
+import rmit.saintgiong.discoveryapi.external.services.ExternalDiscoveryRequestInterface;
+import rmit.saintgiong.discoveryservice.domain.services.SearchProfileRepository;
+import rmit.saintgiong.discoveryservice.domain.entity.SearchProfileEntity;
+
 
 // Avro Imports
 import rmit.saintgiong.jobapplicant.userprofile.avro.JaApplicantCreatedEvent;
 import rmit.saintgiong.jobapplicant.userprofile.avro.JaApplicantUpdatedEvent;
 import rmit.saintgiong.jobapplicant.userprofile.avro.EducationEvent;
 import rmit.saintgiong.jobapplicant.userprofile.avro.WorkExperienceEvent;
+import rmit.saintgiong.discoveryapi.external.dto.avro.ApplicantMatchNotificationRecord; // Generated Avro
 
 @Service
 public class CloudKafkaConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(CloudKafkaConsumer.class);
     private final IndexingInterface indexingInterface;
+    private final ExternalDiscoveryRequestInterface externalDiscoveryRequestService;
+    private final SearchProfileRepository searchProfileRepository;
 
-    public CloudKafkaConsumer(IndexingInterface indexingInterface) {
+    public CloudKafkaConsumer(
+            IndexingInterface indexingInterface,
+            ExternalDiscoveryRequestInterface externalDiscoveryRequestService,
+            SearchProfileRepository searchProfileRepository
+    ) {
         this.indexingInterface = indexingInterface;
+        this.externalDiscoveryRequestService = externalDiscoveryRequestService;
+        this.searchProfileRepository = searchProfileRepository;
     }
 
     @KafkaListener(
@@ -51,6 +67,9 @@ public class CloudKafkaConsumer {
             indexingInterface.indexApplicant(document);
 
             log.info("Successfully indexed ADDED applicant: {}", userId);
+
+            // Check for matches (isUpdate = false)
+            checkMatches(document, false);
 
         } catch (Exception e) {
             log.error("Error consuming applicant ADD event for userId: {}", userId, e);
@@ -72,6 +91,9 @@ public class CloudKafkaConsumer {
             indexingInterface.indexApplicant(document);
 
             log.info("Successfully indexed UPDATED applicant: {}", userId);
+
+            // Check for matches (isUpdate = true)
+            checkMatches(document, true);
 
         } catch (Exception e) {
             log.error("Error consuming applicant UPDATE event for userId: {}", userId, e);
@@ -97,6 +119,109 @@ public class CloudKafkaConsumer {
             log.error("Error consuming applicant DELETE event for userId: {}", userId, e);
         }
     }
+    
+
+    // --- Matching Logic ---
+
+    private void checkMatches(ApplicantDocument applicant, boolean isUpdate) {
+        try {
+            // 1. Get all premium company IDs
+            List<Object> companyIdObjects = externalDiscoveryRequestService.sendGetAllPremiumCompaniesRequest();
+            if (companyIdObjects == null || companyIdObjects.isEmpty()) {
+                log.info("No premium companies found or error fetching them.");
+                return;
+            }
+
+            List<UUID> premiumCompanyIds = companyIdObjects.stream()
+                    .map(obj -> {
+                        try {
+                            return UUID.fromString(obj.toString());
+                        } catch (Exception e) {
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+
+            if (premiumCompanyIds.isEmpty()) {
+                return;
+            }
+
+            // 2. Get search profiles for these companies
+            List<SearchProfileEntity> searchProfiles = searchProfileRepository.findByCompanyIdIn(premiumCompanyIds);
+            
+            // MOCK DATA FOR TESTING
+
+            
+            log.info("Found {} search profiles from premium companies to check against applicant {}", searchProfiles.size(), applicant.applicantId());
+
+            // 3. Compare applicant against profiles
+            for (SearchProfileEntity profile : searchProfiles) {
+                if (isMatch(applicant, profile)) {
+                    log.info("MATCH FOUND: Applicant {} matches Search Profile {} (Company {})", 
+                        applicant.applicantId(), profile.getProfileId(), profile.getCompanyId());
+                    
+                    // Send notification
+                    ApplicantMatchNotificationRecord notification = ApplicantMatchNotificationRecord.newBuilder()
+                            .setApplicantId(applicant.applicantId())
+                            .setCompanyId(profile.getCompanyId())
+                            .setSearchProfileId(profile.getProfileId())
+                            .build();
+
+                    externalDiscoveryRequestService.sendMatchNotification(notification, isUpdate);
+                }
+            }
+
+        } catch (Exception e) {
+            log.error("Error checking matches for applicant {}", applicant.applicantId(), e);
+        }
+    }
+
+    private boolean isMatch(ApplicantDocument applicant, SearchProfileEntity profile) {
+        // 1. Country Check
+        if (profile.getCountry() != null && !profile.getCountry().isEmpty()) {
+            if (applicant.country() == null || !applicant.country().equalsIgnoreCase(profile.getCountry())) {
+                return false;
+            }
+        }
+
+        // 2. Degree Check
+        if (profile.getHighestDegree() != null) {
+            boolean degreeMatches = false;
+            if (applicant.educations() != null) {
+                for (Education edu : applicant.educations()) {
+                    if (edu.degree() != null && edu.degree().toUpperCase().contains(profile.getHighestDegree().name())) {
+                        degreeMatches = true;
+                        break;
+                    }
+                }
+            }
+            if (!degreeMatches) return false;
+        }
+
+        // 3. Skills Check (Applicant must have ALL required skills)
+        if (profile.getSkillTags() != null && !profile.getSkillTags().isEmpty()) {
+            if (applicant.skillIds() == null || applicant.skillIds().isEmpty()) {
+                return false;
+            }
+            // Convert applicant's Long IDs to Integer for comparison (handling potential type mismatch)
+            Set<Integer> applicantSkillIds = applicant.skillIds().stream()
+                    .map(Long::intValue)
+                    .collect(Collectors.toSet());
+
+            Set<Integer> requiredSkillIds = profile.getSkillTags().stream()
+                    .map(tagEntity -> tagEntity.getSkillTagId().getTagId())
+                    .collect(Collectors.toSet());
+
+            // Match if have any required skill
+            if (Collections.disjoint(applicantSkillIds, requiredSkillIds)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
     private ApplicantDocument mapToDocument(JaApplicantUpdatedEvent event) {
         List<Education> educations = (event.getEducations() != null)

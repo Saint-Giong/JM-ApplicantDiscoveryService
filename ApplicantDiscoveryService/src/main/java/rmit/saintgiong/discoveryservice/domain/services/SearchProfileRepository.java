@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface SearchProfileRepository extends JpaRepository<SearchProfileEntity, UUID> {
     List<SearchProfileEntity> findByCompanyId(UUID companyId);
+
+    List<SearchProfileEntity> findByCompanyIdIn(List<UUID> companyIds);
 }

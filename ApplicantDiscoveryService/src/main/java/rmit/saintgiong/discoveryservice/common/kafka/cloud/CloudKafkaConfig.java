@@ -19,12 +19,12 @@ public class CloudKafkaConfig {
     private final String schemaRegistrySecret;
 
     public CloudKafkaConfig(
-            @Value("${CLOUDKAFKA_BROKERS}") String bootstrapServers,
-            @Value("${SCHEMA_REGISTRY_URL}") String schemaRegistryUrl,
-            @Value("${CLOUDKAFKA_API_KEY}") String apiKey,
-            @Value("${CLOUDKAFKA_API_SECRET}") String apiSecret,
-            @Value("${SCHEMA_REGISTRY_KEY}") String schemaRegistryKey,
-            @Value("${SCHEMA_REGISTRY_SECRET}") String schemaRegistrySecret) {
+            @Value("${kafka.cloud.bootstrap-servers}") String bootstrapServers,
+            @Value("${kafka.cloud.schema-registry.url}") String schemaRegistryUrl,
+            @Value("${kafka.cloud.security.api-key}") String apiKey,
+            @Value("${kafka.cloud.security.api-secret}") String apiSecret,
+            @Value("${kafka.cloud.schema-registry.api-key}") String schemaRegistryKey,
+            @Value("${kafka.cloud.schema-registry.api-secret}") String schemaRegistrySecret) {
         this.bootstrapServers = bootstrapServers;
         this.schemaRegistryUrl = schemaRegistryUrl;
         this.apiKey = apiKey;
