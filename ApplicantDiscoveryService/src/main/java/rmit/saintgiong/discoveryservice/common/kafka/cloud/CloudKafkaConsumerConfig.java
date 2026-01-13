@@ -26,18 +26,18 @@ public class CloudKafkaConsumerConfig {
     public ConsumerFactory<String, Object> cloudConsumerFactory() {
         Map<String, Object> config = cloudKafkaConfig.getCloudConfigs();
 
-        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
-        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class);
 
-        config.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
-        config.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, KafkaAvroDeserializer.class);
+//        config.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, );
+//        config.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, );
 
         // Crucial for mapping Avro to your Java DTOs
         config.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, true);
 
         // "earliest" ensures you don't miss messages if the app starts fresh
-        config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        config.put(ConsumerConfig.GROUP_ID_CONFIG, "discovery-service-cloud-consumer-group");
+        config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "discovery-service-cloud-consumer-group-12234566554");
 
         return new DefaultKafkaConsumerFactory<>(config);
     }

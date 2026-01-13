@@ -1,5 +1,6 @@
 package rmit.saintgiong.discoveryservice.domain.services;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import rmit.saintgiong.discoveryservice.domain.entity.SearchProfileEntity;
@@ -11,5 +12,6 @@ import java.util.UUID;
 public interface SearchProfileRepository extends JpaRepository<SearchProfileEntity, UUID> {
     List<SearchProfileEntity> findByCompanyId(UUID companyId);
 
+    @EntityGraph(attributePaths = "skillTags")
     List<SearchProfileEntity> findByCompanyIdIn(List<UUID> companyIds);
 }
