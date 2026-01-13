@@ -144,130 +144,99 @@ public class SearchingService implements SearchingInterface {
 
         List<Query> mustQueries = new ArrayList<>();
 
-        // 1. Name Search (First Name OR Last Name)
+        String targetLocation = (locationValue != null && !locationValue.isBlank()) ? locationValue : "Vietnam";
+        boolean targetIsCountry = (locationValue == null || locationValue.isBlank()) || isCountry;
+
+        if (targetIsCountry) {
+            mustQueries.add(QueryBuilders.match()
+                    .field("country")
+                    .query(targetLocation)
+                    .build()._toQuery());
+        } else {
+            mustQueries.add(QueryBuilders.match() // Use match for fuzziness/case-insensitivity or term for exact
+                    .field("city")
+                    .query(targetLocation)
+                    .build()._toQuery());
+        }
+
         if (name != null && !name.isBlank()) {
-            Query nameQuery = QueryBuilders.multiMatch()
+            mustQueries.add(QueryBuilders.multiMatch()
                     .fields("firstName", "lastName")
                     .query(name)
                     .fuzziness("AUTO")
-                    .build()
-                    ._toQuery();
-            mustQueries.add(nameQuery);
+                    .build()._toQuery());
         }
 
-        // 2. Full Text Search (Keywords)
-        // Searches in biography AND nested work experience fields AND nested education fields
         if (keyword != null && !keyword.isBlank()) {
+            List<Query> ftsShouldQueries = new ArrayList<>();
+
+            ftsShouldQueries.add(QueryBuilders.multiMatch()
+                    .fields("biography", "aboutMe", "skillNames")
+                    .query(keyword)
+                    .fuzziness("AUTO")
+                    .build()._toQuery());
+
+            Query nestedWorkExpQuery = QueryBuilders.multiMatch()
+                    .fields("workExperiences.description", "workExperiences.position", "workExperiences.companyName")
+                    .query(keyword)
+                    .fuzziness("AUTO")
+                    .build()._toQuery();
             
-            // Should clause for top-level fields
-            Query topLevelMatch = QueryBuilders.multiMatch()
-                    .fields("biography")
-                    .query(keyword)
-                    .fuzziness("AUTO")
-                    .build()
-                    ._toQuery();
+            ftsShouldQueries.add(QueryBuilders.nested()
+                    .path("workExperiences")
+                    .query(nestedWorkExpQuery)
+                    .build()._toQuery());
 
-            // Should clause for Nested Work Experience (Flattened path)
-            Query nestedWorkExpMatch = QueryBuilders.multiMatch()
-                    .fields("workExperienceList.position", "workExperienceList.description", "workExperienceList.companyName")
-                    .query(keyword)
-                    .fuzziness("AUTO")
-                    .build()
-                    ._toQuery();
-
-             // Should clause for Nested Education (Flattened path)
-            Query nestedEducationMatch = QueryBuilders.multiMatch()
-                    .fields("educationList.institutionName", "educationList.description")
-                    .query(keyword)
-                    .fuzziness("AUTO")
-                    .build()
-                    ._toQuery();
-
-
-            // Combine
-            Query ftsCombination = QueryBuilders.bool()
-                    .should(topLevelMatch)
-                    .should(nestedWorkExpMatch)
-                    .should(nestedEducationMatch)
+            mustQueries.add(QueryBuilders.bool()
+                    .should(ftsShouldQueries)
                     .minimumShouldMatch("1")
-                    .build()
-                    ._toQuery();
-
-            mustQueries.add(ftsCombination);
+                    .build()._toQuery());
         }
 
-        // 2. Location Filter
-        if (locationValue != null && !locationValue.isBlank()) {
-            if (isCountry) {
-                // Exact match on Country Code
-                 Query countryQuery = QueryBuilders.term()
-                        .field("country")
-                        .value(locationValue)
-                        .caseInsensitive(true)
-                        .build()
-                        ._toQuery();
-                mustQueries.add(countryQuery);
-            } else {
-                // City is a Keyword field, use Term for exact or wildcard for flexibility.
-                Query cityQuery = QueryBuilders.term()
-                        .field("city")
-                        .value(locationValue)
-                        .caseInsensitive(true)
-                        .build()
-                        ._toQuery();
-                mustQueries.add(cityQuery);
-            }
-        }
-
-        // 3. Education Level Filter
         if (educationLevels != null && !educationLevels.isEmpty()) {
-            //case sensitivity
-             List<String> upperCaseDegrees = educationLevels.stream()
-                .map(String::toUpperCase)
+             List<Query> degreeQueries = educationLevels.stream()
+                .map(degree -> QueryBuilders.match()
+                        .field("educations.degree")
+                        .query(degree) 
+                        .build()._toQuery())
                 .collect(Collectors.toList());
 
-            List<Query> degreeQueries = upperCaseDegrees.stream()
-                    .map(degree -> QueryBuilders.match()
-                            .field("educationList.degree")
-                            .query(degree)
-                            .build()
-                            ._toQuery())
-                    .collect(Collectors.toList());
+             Query boolDegree = QueryBuilders.bool().should(degreeQueries).minimumShouldMatch("1").build()._toQuery();
 
-            Query educationQuery = QueryBuilders.bool()
-                    .should(degreeQueries)
-                    .minimumShouldMatch("1")
-                    .build()
-                    ._toQuery();
-
-            mustQueries.add(educationQuery);
+             mustQueries.add(QueryBuilders.nested()
+                     .path("educations")
+                     .query(boolDegree)
+                     .build()._toQuery());
         }
 
-        // 4. Skills Filter (IDs)
         if (skillIds != null && !skillIds.isEmpty()) {
-            Query skillsQuery = QueryBuilders.terms()
+            List<FieldValue> values = skillIds.stream().map(FieldValue::of).collect(Collectors.toList());
+            mustQueries.add(QueryBuilders.terms()
                     .field("skillIds")
-                    .terms(t -> t.value(skillIds.stream().map(FieldValue::of).collect(Collectors.toList())))
-                    .build()
-                    ._toQuery();
-            mustQueries.add(skillsQuery);
+                    .terms(t -> t.value(values))
+                    .build()._toQuery());
         }
 
-        // 5. Work Experience Type Filter
         if (workExperienceType != null) {
             if ("NONE".equalsIgnoreCase(workExperienceType)) {
-                // Must NOT have workExperienceList
-                Query exists = QueryBuilders.exists().field("workExperienceList").build()._toQuery();
-                Query mustNotHaveExp = QueryBuilders.bool().mustNot(exists).build()._toQuery();
-                mustQueries.add(mustNotHaveExp);
+                // No Experience
+                Query nestedAny = QueryBuilders.nested()
+                        .path("workExperiences")
+                        .query(QueryBuilders.matchAll().build()._toQuery())
+                        .build()._toQuery();
+                mustQueries.add(QueryBuilders.bool().mustNot(nestedAny).build()._toQuery());
+                
             } else if ("ANY".equalsIgnoreCase(workExperienceType)) {
-                 // Must HAVE workExperienceList
-                 Query mustHaveExp = QueryBuilders.exists().field("workExperienceList").build()._toQuery();
-                mustQueries.add(mustHaveExp);
+                 // Must have at least one
+                Query nestedAny = QueryBuilders.nested()
+                        .path("workExperiences")
+                        .query(QueryBuilders.matchAll().build()._toQuery())
+                        .build()._toQuery();
+                mustQueries.add(nestedAny);
             }
+            
         }
 
-        //Final Query
         Query finalQuery = QueryBuilders.bool()
                 .must(mustQueries)
                 .build()
@@ -291,7 +260,6 @@ public class SearchingService implements SearchingInterface {
         return new PageImpl<>(applicants, pageable, hits.getTotalHits());
     }
 
-    // Helper method to execute query and map results
     private List<ApplicantDocument> executeQuery(Query query) {
         NativeQuery nativeQuery = NativeQuery.builder()
                 .withQuery(query)

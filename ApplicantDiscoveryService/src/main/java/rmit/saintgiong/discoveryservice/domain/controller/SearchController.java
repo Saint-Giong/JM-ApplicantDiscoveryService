@@ -2,16 +2,13 @@ package rmit.saintgiong.discoveryservice.domain.controller;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import rmit.saintgiong.discoveryapi.internal.document.ApplicantDocument;
 import rmit.saintgiong.discoveryapi.internal.service.elasticsearch.SearchingInterface;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,9 +17,16 @@ import java.util.UUID;
 public class SearchController {
 
     private final SearchingInterface searchingInterface;
+    private final rmit.saintgiong.discoveryservice.domain.services.external.ExternalUserProfileService externalUserProfileService;
 
-    public SearchController(SearchingInterface searchingInterface) {
+    public SearchController(SearchingInterface searchingInterface, rmit.saintgiong.discoveryservice.domain.services.external.ExternalUserProfileService externalUserProfileService) {
         this.searchingInterface = searchingInterface;
+        this.externalUserProfileService = externalUserProfileService;
+    }
+
+    @PostMapping("applicants/sync")
+    public ResponseEntity<List<ApplicantDocument>> syncApplicants() {
+        return ResponseEntity.ok(externalUserProfileService.syncApplicants());
     }
 
     @GetMapping("applicants/all")
