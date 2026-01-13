@@ -9,6 +9,7 @@ import rmit.saintgiong.discoveryapi.internal.service.elasticsearch.SearchingInte
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import rmit.saintgiong.discoveryservice.domain.services.external.ExternalUserProfileService;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +18,7 @@ import java.util.UUID;
 public class SearchController {
 
     private final SearchingInterface searchingInterface;
-    private final rmit.saintgiong.discoveryservice.domain.services.external.ExternalUserProfileService externalUserProfileService;
+    private final ExternalUserProfileService externalUserProfileService;
 
     public SearchController(SearchingInterface searchingInterface, rmit.saintgiong.discoveryservice.domain.services.external.ExternalUserProfileService externalUserProfileService) {
         this.searchingInterface = searchingInterface;
