@@ -1,0 +1,14 @@
+{
+  "namespace": "rmit.saintgiong.shared.dto.avro.discovery",
+  "type": "record",
+  "name": "GetPremiumCompanyStatusRequestRecord",
+  "fields": [
+    {
+      "name": "companyId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    }
+  ]
+}
