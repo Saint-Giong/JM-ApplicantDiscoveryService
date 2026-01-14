@@ -74,7 +74,7 @@ public class ExternalDiscoveryRequestService implements ExternalDiscoveryRequest
             // 2. Send and wait for reply
             GetCompanyPremiumStatusResponseRecord response = eventProducer.sendAndReceive(
                     KafkaTopic.JM_COMPANY_PREMIUM_STATUS_REQUEST_TOPIC,
-                    KafkaTopic.JM_PREMIUM_COMPANY_LIST_RESPONSE_TOPIC,
+                    KafkaTopic.JM_COMPANY_PREMIUM_STATUS_RESPONSE_TOPIC,
                     request,
                     GetCompanyPremiumStatusResponseRecord.class
             );
