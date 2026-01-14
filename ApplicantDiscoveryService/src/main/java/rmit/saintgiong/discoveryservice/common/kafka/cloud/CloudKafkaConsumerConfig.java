@@ -12,6 +12,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 
 import java.util.Map;
+import java.util.UUID;
 
 @Configuration
 public class CloudKafkaConsumerConfig {
@@ -37,7 +38,7 @@ public class CloudKafkaConsumerConfig {
 
         // "earliest" ensures you don't miss messages if the app starts fresh
         config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
-        config.put(ConsumerConfig.GROUP_ID_CONFIG, "discovery-service-cloud-consumer-group-12234566554");
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "discovery-service-cloud-consumer-group-" + UUID.randomUUID());
 
         return new DefaultKafkaConsumerFactory<>(config);
     }
