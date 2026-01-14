@@ -275,4 +275,7 @@ public class SearchingService implements SearchingInterface {
                 .map(hit -> hit.getContent())
                 .collect(Collectors.toList());
     }
+    public void deleteIndex() {
+        elasticsearchOperations.indexOps(IndexCoordinates.of(APPLICANTS_INDEX)).delete();
+    }
 }

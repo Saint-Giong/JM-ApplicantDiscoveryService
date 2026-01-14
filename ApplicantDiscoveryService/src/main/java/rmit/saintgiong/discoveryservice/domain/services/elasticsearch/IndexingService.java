@@ -25,6 +25,9 @@ public class IndexingService implements IndexingInterface {
     @Override
     public void indexApplicant(ApplicantDocument document) {
         try {
+            // Ensure index exists with correct mapping before indexing
+            ensureIndexExists();
+
             IndexQuery indexQuery = new IndexQueryBuilder()
                     .withId(document.applicantId().toString())
                     .withObject(document)
@@ -36,6 +39,20 @@ public class IndexingService implements IndexingInterface {
         } catch (Exception e) {
             log.error("Failed to index applicant: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to index applicant", e);
+        }
+    }
+
+    /**
+     * Ensures the index exists with the correct mapping derived from ApplicantDocument annotations.
+     * This is critical for nested fields like 'educations' and 'workExperiences' to work correctly.
+     */
+    private void ensureIndexExists() {
+        var indexOps = elasticsearchOperations.indexOps(ApplicantDocument.class);
+        if (!indexOps.exists()) {
+            log.info("Creating index '{}' with mapping from ApplicantDocument annotations", APPLICANTS_INDEX);
+            indexOps.create();
+            indexOps.putMapping(indexOps.createMapping());
+            log.info("Index '{}' created successfully with correct nested mapping", APPLICANTS_INDEX);
         }
     }
 

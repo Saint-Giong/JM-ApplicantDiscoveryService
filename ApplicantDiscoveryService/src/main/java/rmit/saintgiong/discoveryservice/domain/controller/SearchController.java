@@ -60,4 +60,13 @@ public class SearchController {
         return ResponseEntity.ok(searchingInterface.searchApplicants(
                 name, keyword, location, isCountry, education, skills, experienceType, pageable));
     }
+
+    @DeleteMapping("applicants/index")
+    public ResponseEntity<String> resetIndex() {
+        if (searchingInterface instanceof rmit.saintgiong.discoveryservice.domain.services.elasticsearch.SearchingService) {
+            ((rmit.saintgiong.discoveryservice.domain.services.elasticsearch.SearchingService) searchingInterface).deleteIndex();
+            return ResponseEntity.ok("Index deleted. Please call /applicants/sync to re-populate.");
+        }
+        return ResponseEntity.status(501).body("Not implemented or interface mismatch");
+    }
 }
